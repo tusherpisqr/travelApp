@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "travel app new/TableViewCellOne.swift"
+            timestampString = "470389488.198914"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "5"
+            endingLineNumber = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "travel_app_new.TableViewCellOne.init (travel_app_new.TableViewCellOne.Type)(style : __C.UITableViewCellStyle, reuseIdentifier : Swift.Optional&lt;Swift.String&gt;) -&gt; travel_app_new.TableViewCellOne"
+                  moduleName = "travel app new"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tusher/Desktop/travel%20app%20new%202/travel%20app%20new/TableViewCellOne.swift"
+                  timestampString = "470660361.883242"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "58">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "travel_app_new.TableViewCellOne.init (travel_app_new.TableViewCellOne.Type)(coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;travel_app_new.TableViewCellOne&gt;"
+                  moduleName = "travel app new"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tusher/Desktop/travel%20app%20new%202/travel%20app%20new/TableViewCellOne.swift"
+                  timestampString = "470660361.884268"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "19">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
