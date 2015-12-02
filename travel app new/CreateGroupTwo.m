@@ -8,6 +8,7 @@
 
 #import "CreateGroupTwo.h"
 
+
 @implementation CreateGroupTwo
 
 @synthesize txtDate,txtGroupName,txtMemberNumber,tableView,addRow;
@@ -16,26 +17,213 @@
     num=0;
     [addRow addTarget:self action:@selector(add) forControlEvents:UIControlEventTouchUpInside];
     [[self tableView] setEditing:YES animated:YES];
-    recipes = [NSMutableArray arrayWithObjects:@"Dhaka",@"Chittagong",@"Dahagram",  nil];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(dismissKeyboard)];
+    recipes = [[NSMutableArray alloc]init];
+ 
     
-    [self.view addGestureRecognizer:tap];
-
+ 
+    txtGroupName.delegate=self;
+    txtDate.delegate=self;
 
 }
 
--(void)dismissKeyboard {
-    [txtDate resignFirstResponder];
-    [txtGroupName resignFirstResponder];
-    [txtMemberNumber resignFirstResponder];
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self adjustHeightOfTableview];
 }
 
+- (void)adjustHeightOfTableview
+{
+    CGFloat height = self.tableView.contentSize.height;
+    CGFloat oldHeight=self.tableView.frame.size.height;
+    CGFloat maxHeight = self.tableView.superview.frame.size.height - self.tableView.frame.origin.y-300;
+    
+    int g=0;
+    
+    if (height > maxHeight)
+    {
+        height = maxHeight;
+        g=1;
+    
+    }
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        CGRect frame = self.tableView.frame;
+        
+        frame.size.height = height;
+        self.tableView.frame = frame;
+        if(g==0){
+            CGRect frameT=lowerView.frame;
+            CGFloat y=lowerView.frame.origin.y;
+            y+=height-oldHeight;
+            frameT.origin.y=y;
+            lowerView.frame=frameT;
+        }
+        
+        
+    }];
+}
 
+- (BOOL) tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void) tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    
+    NSInteger sourceRow = sourceIndexPath.row;
+    NSInteger destRow = destinationIndexPath.row;
+    id object = [recipes objectAtIndex:sourceRow];
+    
+    [recipes removeObjectAtIndex:sourceRow];
+    [recipes insertObject:object atIndex:destRow];
+    
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (textField==txtDate) {
+        [self popCalendar];
+    }
+}
+-(void)popCalendar {
+    newView = [[UIView alloc] initWithFrame:self.view.bounds];
+    newView.backgroundColor=[UIColor grayColor];
+    calendar = [[SACalendar alloc]initWithFrame:CGRectMake(0, 100, newView.frame.size.width, 400)];
+    
+    calendar.delegate = self;
+    
+    [newView addSubview:calendar];
+    [self.view addSubview:newView];
+}
+
+// Prints out the selected date
+-(void) SACalendar:(SACalendar*)calendar didSelectDate:(int)day month:(int)month year:(int)year
+{
+    NSString* date=[NSString stringWithFormat:@"%d/%d/%d", day,month,year];
+   
+    txtDate.text=date;
+    
+    [self->newView removeFromSuperview];
+    [txtGroupName becomeFirstResponder];
+    
+}
+
+// Prints out the month and year displaying on the calendar
+-(void) SACalendar:(SACalendar *)calendar didDisplayCalendarForMonth:(int)month year:(int)year{
+    NSLog(@"%02/%i",month,year);
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField*)textField;
+{
+    [textField resignFirstResponder];
+       
+    return NO;
+}
 -(void)add{
-    num++;
+    
+    UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Keyword Search"
+                                                           message:@""
+                                                          delegate:self
+                                                 cancelButtonTitle:nil
+                                                 otherButtonTitles:@"Search", nil] ;
+    
+    myAlertView.delegate=self;
+    
+    myAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [myAlertView show];
+   
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    NSString *searchTerm = [alertView textFieldAtIndex:0].text;
+    [recipes addObject:searchTerm];
+    
     [tableView reloadData];
+    [self adjustHeightOfTableview];
+ 
+}
+- (IBAction)addGroupAction:(id)sender {
+    
+    NSString* device_token=@"123456";
+    
+    NSString *aValue = [[NSUserDefaults standardUserDefaults] objectForKey:@"session_id"];
+   
+   
+    
+    NSString* session_id=@"241702411";
+   
+    CLLocationCoordinate2D center;
+    center=[self getLocationFromAddressString:@"Chittagong"];
+    double  latFrom=center.latitude;
+    double  lonFrom=center.longitude;
+    
+    NSString *post = [NSString stringWithFormat:@"session_id=%@&longitude=%f&latitude=%f&zoom=%d",session_id,lonFrom,latFrom,10];
+    
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+    
+    NSMutableURLRequest *requestT = [[NSMutableURLRequest alloc] init] ;
+    
+    [requestT setURL:[NSURL URLWithString:@"http://travel.cityu.me/travelgroups/addGroup/"]];
+    
+    [requestT setHTTPMethod:@"POST"];
+    
+    [requestT setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
+    [requestT setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    [requestT setHTTPBody:postData];
+    
+    [self.view endEditing:YES];
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:requestT delegate:self];
+    
+    if(conn) {
+        NSLog(@"Connection Successful");
+        
+    } else {
+        NSLog(@"Connection could not be made");
+        
+        
+    }
+
+    
+    
+    for (NSString* name in recipes) {
+        CLLocationCoordinate2D center;
+        center=[self getLocationFromAddressString:name];
+        double  latFrom=center.latitude;
+        double  lonFrom=center.longitude;
+        
+        NSLog(@"View Controller get Location Logitute : %f",latFrom);
+        NSLog(@"View Controller get Location Latitute : %f",lonFrom);
+    }
+
+}
+
+-(CLLocationCoordinate2D) getLocationFromAddressString: (NSString*) addressStr {
+    double latitude = 0, longitude = 0;
+    NSString *esc_addr =  [addressStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *req = [NSString stringWithFormat:@"http://maps.google.com/maps/api/geocode/json?sensor=false&address=%@", esc_addr];
+    NSString *result = [NSString stringWithContentsOfURL:[NSURL URLWithString:req] encoding:NSUTF8StringEncoding error:NULL];
+    if (result) {
+        NSScanner *scanner = [NSScanner scannerWithString:result];
+        if ([scanner scanUpToString:@"\"lat\" :" intoString:nil] && [scanner scanString:@"\"lat\" :" intoString:nil]) {
+            [scanner scanDouble:&latitude];
+            if ([scanner scanUpToString:@"\"lng\" :" intoString:nil] && [scanner scanString:@"\"lng\" :" intoString:nil]) {
+                [scanner scanDouble:&longitude];
+            }
+        }
+    }
+    CLLocationCoordinate2D center;
+    center.latitude=latitude;
+    center.longitude = longitude;
+    NSLog(@"View Controller get Location Logitute : %f",center.latitude);
+    NSLog(@"View Controller get Location Latitute : %f",center.longitude);
+    return center;
+    
 }
 
 - (IBAction)action:(UIStepper *)sender {
@@ -50,19 +238,18 @@
     return YES;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
+
 
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        num--;
+        [recipes removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                          withRowAnimation:UITableViewRowAnimationFade];
+        [tableView reloadData];
+        [self adjustHeightOfTableview];
        
 
     }
@@ -70,7 +257,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return num;    //count number of row from counting array hear cataGorry is An Array
+    return [recipes count];
 }
 
 
@@ -88,21 +275,37 @@
                                        reuseIdentifier:@"ss"] ;
     }
     
-//    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    
-//    //set the position of the button
-//    button.frame = CGRectMake(cell.frame.origin.x + cell.frame.size.width -20, cell.frame.origin.y + 20, 20, 30);
-//    [button setTitle:@"X" forState:UIControlStateNormal];
-//    [button addTarget:self action:@selector(customActionPressed) forControlEvents:UIControlEventTouchUpInside];
-//    button.backgroundColor= [UIColor clearColor];
-//    [cell.contentView addSubview:button];
     
-    cell.textLabel.text = @"My Text";
+    cell.textLabel.text = [recipes objectAtIndex:indexPath.row];
     return cell;
 }
 
--(void)customActionPressed{
+#pragma mark NSURLConnection Delegate Methods
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     
+    responseData = [[NSMutableData alloc] init];
 }
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    
+    [responseData appendData:data];
+}
+
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection
+                  willCacheResponse:(NSCachedURLResponse*)cachedResponse {
+    
+    return nil;
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    
+    NSError *e;
+    
+    
+   
+    
+    }
+
 
 @end

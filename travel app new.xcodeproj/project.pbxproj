@@ -25,6 +25,10 @@
 		18D2012C1BFF89FE0079FA8C /* groupsSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2012B1BFF89FE0079FA8C /* groupsSampleData.swift */; };
 		18D2012E1BFF8A440079FA8C /* sampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2012D1BFF8A440079FA8C /* sampleData.swift */; };
 		18F8363E1C04D05D00D4FF42 /* tabelViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8363D1C04D05D00D4FF42 /* tabelViewTest.swift */; };
+		38D9C4F41C0EBBE30012AAAC /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D9C4EC1C0EBBE30012AAAC /* DateUtil.m */; };
+		38D9C4F51C0EBBE30012AAAC /* DMLazyScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D9C4EE1C0EBBE30012AAAC /* DMLazyScrollView.m */; };
+		38D9C4F61C0EBBE30012AAAC /* SACalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D9C4F01C0EBBE30012AAAC /* SACalendar.m */; };
+		38D9C4F71C0EBBE30012AAAC /* SACalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D9C4F21C0EBBE30012AAAC /* SACalendarCell.m */; };
 		38DAB4EE1C0992D20033920F /* userRegistrationTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DAB4ED1C0992D20033920F /* userRegistrationTwo.m */; };
 		38DAB4F11C09CD9D0033920F /* homeSearchTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DAB4F01C09CD9D0033920F /* homeSearchTwo.m */; };
 		38DBEF8B1C08776F004F5300 /* TableViewCellOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DBEF891C08776F004F5300 /* TableViewCellOne.swift */; };
@@ -79,6 +83,15 @@
 		18D2012D1BFF8A440079FA8C /* sampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sampleData.swift; sourceTree = "<group>"; };
 		18F8363D1C04D05D00D4FF42 /* tabelViewTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tabelViewTest.swift; sourceTree = "<group>"; };
 		2C6E26D66F9D9FE04A082060 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		38D9C4EB1C0EBBE30012AAAC /* DateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateUtil.h; sourceTree = "<group>"; };
+		38D9C4EC1C0EBBE30012AAAC /* DateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateUtil.m; sourceTree = "<group>"; };
+		38D9C4ED1C0EBBE30012AAAC /* DMLazyScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMLazyScrollView.h; sourceTree = "<group>"; };
+		38D9C4EE1C0EBBE30012AAAC /* DMLazyScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMLazyScrollView.m; sourceTree = "<group>"; };
+		38D9C4EF1C0EBBE30012AAAC /* SACalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SACalendar.h; sourceTree = "<group>"; };
+		38D9C4F01C0EBBE30012AAAC /* SACalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SACalendar.m; sourceTree = "<group>"; };
+		38D9C4F11C0EBBE30012AAAC /* SACalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SACalendarCell.h; sourceTree = "<group>"; };
+		38D9C4F21C0EBBE30012AAAC /* SACalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SACalendarCell.m; sourceTree = "<group>"; };
+		38D9C4F31C0EBBE30012AAAC /* SACalendarConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SACalendarConstants.h; sourceTree = "<group>"; };
 		38DAB4EB1C0992D10033920F /* travel app new-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "travel app new-Bridging-Header.h"; sourceTree = "<group>"; };
 		38DAB4EC1C0992D20033920F /* userRegistrationTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = userRegistrationTwo.h; path = ../userRegistrationTwo.h; sourceTree = "<group>"; };
 		38DAB4ED1C0992D20033920F /* userRegistrationTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = userRegistrationTwo.m; path = ../userRegistrationTwo.m; sourceTree = "<group>"; };
@@ -186,6 +199,15 @@
 				80EEB8601BFF22D90029CD94 /* AppDelegate.swift */,
 				80EEB8621BFF22D90029CD94 /* ViewController.swift */,
 				80EEB8641BFF22D90029CD94 /* Main.storyboard */,
+				38D9C4EB1C0EBBE30012AAAC /* DateUtil.h */,
+				38D9C4EC1C0EBBE30012AAAC /* DateUtil.m */,
+				38D9C4ED1C0EBBE30012AAAC /* DMLazyScrollView.h */,
+				38D9C4EE1C0EBBE30012AAAC /* DMLazyScrollView.m */,
+				38D9C4EF1C0EBBE30012AAAC /* SACalendar.h */,
+				38D9C4F01C0EBBE30012AAAC /* SACalendar.m */,
+				38D9C4F11C0EBBE30012AAAC /* SACalendarCell.h */,
+				38D9C4F21C0EBBE30012AAAC /* SACalendarCell.m */,
+				38D9C4F31C0EBBE30012AAAC /* SACalendarConstants.h */,
 				38DAB4EC1C0992D20033920F /* userRegistrationTwo.h */,
 				38DAB4ED1C0992D20033920F /* userRegistrationTwo.m */,
 				38E795F51C0C1B7B00471591 /* userRegistrationThree.h */,
@@ -438,14 +460,18 @@
 				38E796391C0C45DD00471591 /* CreateGroupTwo.m in Sources */,
 				18F8363E1C04D05D00D4FF42 /* tabelViewTest.swift in Sources */,
 				18D2011B1BFF4F430079FA8C /* mainChatList.swift in Sources */,
+				38D9C4F61C0EBBE30012AAAC /* SACalendar.m in Sources */,
 				38DAB4EE1C0992D20033920F /* userRegistrationTwo.m in Sources */,
 				18D2011F1BFF4FF90079FA8C /* profileSettings.swift in Sources */,
 				18D201131BFF4D1F0079FA8C /* groupDetails.swift in Sources */,
+				38D9C4F71C0EBBE30012AAAC /* SACalendarCell.m in Sources */,
 				1805A9101C063F08001867BA /* heyManTableViewController.swift in Sources */,
 				38DBEF8B1C08776F004F5300 /* TableViewCellOne.swift in Sources */,
 				80EEB8631BFF22D90029CD94 /* ViewController.swift in Sources */,
 				38E795F71C0C1B7B00471591 /* userRegistrationThree.m in Sources */,
+				38D9C4F51C0EBBE30012AAAC /* DMLazyScrollView.m in Sources */,
 				18D2012C1BFF89FE0079FA8C /* groupsSampleData.swift in Sources */,
+				38D9C4F41C0EBBE30012AAAC /* DateUtil.m in Sources */,
 				18D201211BFF524D0079FA8C /* groupList.swift in Sources */,
 				18D2012E1BFF8A440079FA8C /* sampleData.swift in Sources */,
 				18D201171BFF4DF00079FA8C /* groupSettings.swift in Sources */,

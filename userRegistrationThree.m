@@ -195,7 +195,7 @@
         
         NSString* username=(NSString*)[dict2 objectForKey:@"username"];
         
-        
+         NSString* sessionId=(NSString*)[dict2 objectForKey:@"session_id"];
         
         NSString* password=(NSString*)[dict2 objectForKey:@"password"];
         
