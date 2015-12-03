@@ -50,14 +50,12 @@
                                 <animations/>
                                 <state key="normal" backgroundImage="placeholder_profile_pic.png"/>
                             </button>
-                            <searchBar contentMode="redraw" id="Wn4-Fp-zUL">
-                                <rect key="frame" x="0.0" y="62" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="peC-tk-yX4">
+                                <rect key="frame" x="0.0" y="65" width="414" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="i41-RI-lpG" id="Jt9-uS-iKe"/>
-                                </connections>
-                            </searchBar>
+                            </textField>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -68,20 +66,10 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="gmapView" destination="Is7-wE-0cg" id="vS8-ZQ-byU"/>
-                        <outlet property="searchBar" destination="Wn4-Fp-zUL" id="bQm-aV-ViS"/>
-                        <outlet property="searchDisplayController" destination="dQf-YJ-hYl" id="lIw-Hr-P2o"/>
+                        <outlet property="textFie" destination="peC-tk-yX4" id="AWy-xo-CfN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L9L-Xr-zfs" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="dQf-YJ-hYl">
-                    <connections>
-                        <outlet property="delegate" destination="i41-RI-lpG" id="QJJ-r9-bZq"/>
-                        <outlet property="searchBar" destination="Wn4-Fp-zUL" id="5w5-GD-oYs"/>
-                        <outlet property="searchContentsController" destination="i41-RI-lpG" id="gp8-li-yFV"/>
-                        <outlet property="searchResultsDataSource" destination="i41-RI-lpG" id="eNd-Ag-bJB"/>
-                        <outlet property="searchResultsDelegate" destination="i41-RI-lpG" id="IVX-bG-Cbm"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="8" y="2755"/>
         </scene>
@@ -944,10 +932,10 @@
             </objects>
             <point key="canvasLocation" x="1533" y="901"/>
         </scene>
-        <!--View Controller-->
+        <!--Welcome Screen-->
         <scene sceneID="rHn-Vt-zqM">
             <objects>
-                <viewController id="I2S-tm-6b5" sceneMemberID="viewController">
+                <viewController id="I2S-tm-6b5" customClass="welcomeScreen" customModule="travel_app_new" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zGJ-J7-YRz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1648,7 +1636,7 @@
                             <tableViewSection headerTitle="Section-1" id="kRk-Qb-RTf">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="424-Ua-ReR">
-                                        <rect key="frame" x="0.0" y="92" width="414" height="100"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="424-Ua-ReR" id="Ym1-Ye-OpS">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
@@ -1675,7 +1663,7 @@
                                         <animations/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="2gi-zc-ZLG">
-                                        <rect key="frame" x="0.0" y="192" width="414" height="100"/>
+                                        <rect key="frame" x="0.0" y="128" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2gi-zc-ZLG" id="jt2-iX-fVJ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
@@ -1702,7 +1690,7 @@
                                         <animations/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="t0F-p3-9UL">
-                                        <rect key="frame" x="0.0" y="292" width="414" height="100"/>
+                                        <rect key="frame" x="0.0" y="228" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t0F-p3-9UL" id="5MG-a3-YBk">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
@@ -1728,7 +1716,7 @@
                                         <animations/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="Vxe-V4-SlM">
-                                        <rect key="frame" x="0.0" y="392" width="414" height="100"/>
+                                        <rect key="frame" x="0.0" y="328" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vxe-V4-SlM" id="H5x-pX-2bf">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
@@ -1759,7 +1747,7 @@
                             <tableViewSection headerTitle="" id="pGZ-R5-nsE">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="AC8-uV-gGR">
-                                        <rect key="frame" x="0.0" y="492" width="414" height="100"/>
+                                        <rect key="frame" x="0.0" y="428" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AC8-uV-gGR" id="zf7-YE-DyU">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
@@ -2084,7 +2072,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Hoo-Zv-5sJ"/>
-        <segue reference="uLf-pj-ltD"/>
         <segue reference="wKI-Vj-JP4"/>
+        <segue reference="Lg8-Pc-9nd"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -33,6 +33,12 @@
 		38DAB4F11C09CD9D0033920F /* homeSearchTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DAB4F01C09CD9D0033920F /* homeSearchTwo.m */; };
 		38DBEF8B1C08776F004F5300 /* TableViewCellOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DBEF891C08776F004F5300 /* TableViewCellOne.swift */; };
 		38DBEF8C1C08776F004F5300 /* TableViewCellOne.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38DBEF8A1C08776F004F5300 /* TableViewCellOne.xib */; };
+		38E25BD51C104C6D009EE983 /* TRAutocompleteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E25BC91C104C6D009EE983 /* TRAutocompleteView.m */; };
+		38E25BD61C104C6D009EE983 /* TRGoogleMapsAutocompleteItemsSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E25BCC1C104C6D009EE983 /* TRGoogleMapsAutocompleteItemsSource.m */; };
+		38E25BD71C104C6D009EE983 /* TRGoogleMapsAutocompletionCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E25BCE1C104C6D009EE983 /* TRGoogleMapsAutocompletionCellFactory.m */; };
+		38E25BD81C104C6D009EE983 /* TRGoogleMapsSuggestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E25BD01C104C6D009EE983 /* TRGoogleMapsSuggestion.m */; };
+		38E25BD91C104C6D009EE983 /* TRStringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E25BD21C104C6D009EE983 /* TRStringExtensions.m */; };
+		38E25BDA1C104C6D009EE983 /* TRTextFieldExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E25BD41C104C6D009EE983 /* TRTextFieldExtensions.m */; };
 		38E795F71C0C1B7B00471591 /* userRegistrationThree.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E795F61C0C1B7B00471591 /* userRegistrationThree.m */; };
 		38E796391C0C45DD00471591 /* CreateGroupTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E796381C0C45DD00471591 /* CreateGroupTwo.m */; };
 		6F133CB85F09CAA0F978E36D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A24CD54245CAED24A43DCF77 /* libPods.a */; };
@@ -99,6 +105,20 @@
 		38DAB4F01C09CD9D0033920F /* homeSearchTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = homeSearchTwo.m; sourceTree = "<group>"; };
 		38DBEF891C08776F004F5300 /* TableViewCellOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellOne.swift; sourceTree = "<group>"; };
 		38DBEF8A1C08776F004F5300 /* TableViewCellOne.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCellOne.xib; sourceTree = "<group>"; };
+		38E25BC71C104C6D009EE983 /* TRAutocompleteItemsSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRAutocompleteItemsSource.h; sourceTree = "<group>"; };
+		38E25BC81C104C6D009EE983 /* TRAutocompleteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRAutocompleteView.h; sourceTree = "<group>"; };
+		38E25BC91C104C6D009EE983 /* TRAutocompleteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRAutocompleteView.m; sourceTree = "<group>"; };
+		38E25BCA1C104C6D009EE983 /* TRAutocompletionCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRAutocompletionCellFactory.h; sourceTree = "<group>"; };
+		38E25BCB1C104C6D009EE983 /* TRGoogleMapsAutocompleteItemsSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRGoogleMapsAutocompleteItemsSource.h; sourceTree = "<group>"; };
+		38E25BCC1C104C6D009EE983 /* TRGoogleMapsAutocompleteItemsSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRGoogleMapsAutocompleteItemsSource.m; sourceTree = "<group>"; };
+		38E25BCD1C104C6D009EE983 /* TRGoogleMapsAutocompletionCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRGoogleMapsAutocompletionCellFactory.h; sourceTree = "<group>"; };
+		38E25BCE1C104C6D009EE983 /* TRGoogleMapsAutocompletionCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRGoogleMapsAutocompletionCellFactory.m; sourceTree = "<group>"; };
+		38E25BCF1C104C6D009EE983 /* TRGoogleMapsSuggestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRGoogleMapsSuggestion.h; sourceTree = "<group>"; };
+		38E25BD01C104C6D009EE983 /* TRGoogleMapsSuggestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRGoogleMapsSuggestion.m; sourceTree = "<group>"; };
+		38E25BD11C104C6D009EE983 /* TRStringExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRStringExtensions.h; sourceTree = "<group>"; };
+		38E25BD21C104C6D009EE983 /* TRStringExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRStringExtensions.m; sourceTree = "<group>"; };
+		38E25BD31C104C6D009EE983 /* TRTextFieldExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRTextFieldExtensions.h; sourceTree = "<group>"; };
+		38E25BD41C104C6D009EE983 /* TRTextFieldExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRTextFieldExtensions.m; sourceTree = "<group>"; };
 		38E795F51C0C1B7B00471591 /* userRegistrationThree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = userRegistrationThree.h; path = ../userRegistrationThree.h; sourceTree = "<group>"; };
 		38E795F61C0C1B7B00471591 /* userRegistrationThree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = userRegistrationThree.m; path = ../userRegistrationThree.m; sourceTree = "<group>"; };
 		38E796371C0C45DD00471591 /* CreateGroupTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateGroupTwo.h; sourceTree = "<group>"; };
@@ -159,6 +179,43 @@
 			name = images;
 			sourceTree = "<group>";
 		};
+		38E25BC61C104C55009EE983 /* TRAutoCompleteView */ = {
+			isa = PBXGroup;
+			children = (
+				38E25BC71C104C6D009EE983 /* TRAutocompleteItemsSource.h */,
+				38E25BC81C104C6D009EE983 /* TRAutocompleteView.h */,
+				38E25BC91C104C6D009EE983 /* TRAutocompleteView.m */,
+				38E25BCA1C104C6D009EE983 /* TRAutocompletionCellFactory.h */,
+				38E25BCB1C104C6D009EE983 /* TRGoogleMapsAutocompleteItemsSource.h */,
+				38E25BCC1C104C6D009EE983 /* TRGoogleMapsAutocompleteItemsSource.m */,
+				38E25BCD1C104C6D009EE983 /* TRGoogleMapsAutocompletionCellFactory.h */,
+				38E25BCE1C104C6D009EE983 /* TRGoogleMapsAutocompletionCellFactory.m */,
+				38E25BCF1C104C6D009EE983 /* TRGoogleMapsSuggestion.h */,
+				38E25BD01C104C6D009EE983 /* TRGoogleMapsSuggestion.m */,
+				38E25BD11C104C6D009EE983 /* TRStringExtensions.h */,
+				38E25BD21C104C6D009EE983 /* TRStringExtensions.m */,
+				38E25BD31C104C6D009EE983 /* TRTextFieldExtensions.h */,
+				38E25BD41C104C6D009EE983 /* TRTextFieldExtensions.m */,
+			);
+			name = TRAutoCompleteView;
+			sourceTree = "<group>";
+		};
+		38E25BDB1C1053D9009EE983 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				38D9C4EB1C0EBBE30012AAAC /* DateUtil.h */,
+				38D9C4EC1C0EBBE30012AAAC /* DateUtil.m */,
+				38D9C4ED1C0EBBE30012AAAC /* DMLazyScrollView.h */,
+				38D9C4EE1C0EBBE30012AAAC /* DMLazyScrollView.m */,
+				38D9C4EF1C0EBBE30012AAAC /* SACalendar.h */,
+				38D9C4F01C0EBBE30012AAAC /* SACalendar.m */,
+				38D9C4F11C0EBBE30012AAAC /* SACalendarCell.h */,
+				38D9C4F21C0EBBE30012AAAC /* SACalendarCell.m */,
+				38D9C4F31C0EBBE30012AAAC /* SACalendarConstants.h */,
+			);
+			name = Calendar;
+			sourceTree = "<group>";
+		};
 		41D958F76C79C42D6483959A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,20 +251,13 @@
 		80EEB85F1BFF22D90029CD94 /* travel app new */ = {
 			isa = PBXGroup;
 			children = (
+				38E25BDB1C1053D9009EE983 /* Calendar */,
+				38E25BC61C104C55009EE983 /* TRAutoCompleteView */,
 				80EEB8671BFF22D90029CD94 /* Assets.xcassets */,
+				80EEB8641BFF22D90029CD94 /* Main.storyboard */,
 				18D201281BFF57AD0079FA8C /* images */,
 				80EEB8601BFF22D90029CD94 /* AppDelegate.swift */,
 				80EEB8621BFF22D90029CD94 /* ViewController.swift */,
-				80EEB8641BFF22D90029CD94 /* Main.storyboard */,
-				38D9C4EB1C0EBBE30012AAAC /* DateUtil.h */,
-				38D9C4EC1C0EBBE30012AAAC /* DateUtil.m */,
-				38D9C4ED1C0EBBE30012AAAC /* DMLazyScrollView.h */,
-				38D9C4EE1C0EBBE30012AAAC /* DMLazyScrollView.m */,
-				38D9C4EF1C0EBBE30012AAAC /* SACalendar.h */,
-				38D9C4F01C0EBBE30012AAAC /* SACalendar.m */,
-				38D9C4F11C0EBBE30012AAAC /* SACalendarCell.h */,
-				38D9C4F21C0EBBE30012AAAC /* SACalendarCell.m */,
-				38D9C4F31C0EBBE30012AAAC /* SACalendarConstants.h */,
 				38DAB4EC1C0992D20033920F /* userRegistrationTwo.h */,
 				38DAB4ED1C0992D20033920F /* userRegistrationTwo.m */,
 				38E795F51C0C1B7B00471591 /* userRegistrationThree.h */,
@@ -456,6 +506,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18D2011D1BFF4FB50079FA8C /* userSettings.swift in Sources */,
+				38E25BD71C104C6D009EE983 /* TRGoogleMapsAutocompletionCellFactory.m in Sources */,
 				1805A9121C064DF8001867BA /* groupDetailstable.swift in Sources */,
 				38E796391C0C45DD00471591 /* CreateGroupTwo.m in Sources */,
 				18F8363E1C04D05D00D4FF42 /* tabelViewTest.swift in Sources */,
@@ -465,17 +516,22 @@
 				18D2011F1BFF4FF90079FA8C /* profileSettings.swift in Sources */,
 				18D201131BFF4D1F0079FA8C /* groupDetails.swift in Sources */,
 				38D9C4F71C0EBBE30012AAAC /* SACalendarCell.m in Sources */,
+				38E25BD51C104C6D009EE983 /* TRAutocompleteView.m in Sources */,
+				38E25BD91C104C6D009EE983 /* TRStringExtensions.m in Sources */,
 				1805A9101C063F08001867BA /* heyManTableViewController.swift in Sources */,
 				38DBEF8B1C08776F004F5300 /* TableViewCellOne.swift in Sources */,
 				80EEB8631BFF22D90029CD94 /* ViewController.swift in Sources */,
 				38E795F71C0C1B7B00471591 /* userRegistrationThree.m in Sources */,
 				38D9C4F51C0EBBE30012AAAC /* DMLazyScrollView.m in Sources */,
 				18D2012C1BFF89FE0079FA8C /* groupsSampleData.swift in Sources */,
+				38E25BD81C104C6D009EE983 /* TRGoogleMapsSuggestion.m in Sources */,
+				38E25BD61C104C6D009EE983 /* TRGoogleMapsAutocompleteItemsSource.m in Sources */,
 				38D9C4F41C0EBBE30012AAAC /* DateUtil.m in Sources */,
 				18D201211BFF524D0079FA8C /* groupList.swift in Sources */,
 				18D2012E1BFF8A440079FA8C /* sampleData.swift in Sources */,
 				18D201171BFF4DF00079FA8C /* groupSettings.swift in Sources */,
 				18D201151BFF4D860079FA8C /* groupChat.swift in Sources */,
+				38E25BDA1C104C6D009EE983 /* TRTextFieldExtensions.m in Sources */,
 				38DAB4F11C09CD9D0033920F /* homeSearchTwo.m in Sources */,
 				18D2010F1BFF4C020079FA8C /* welcomeScreen.swift in Sources */,
 				80EEB8611BFF22D90029CD94 /* AppDelegate.swift in Sources */,

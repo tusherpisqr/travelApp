@@ -7,9 +7,11 @@
 //
 
 #import "homeSearchTwo.h"
+#import "TRGoogleMapsAutocompleteItemsSource.h"
+#import "TRGoogleMapsAutocompletionCellFactory.h"
 
 @implementation homeSearchTwo
-@synthesize gmapView,tb,searchBar;
+@synthesize gmapView,textFie;
 -(void)viewDidLoad{
     NSLog(@"abc");
     // Do any additional setup after loading the view.
@@ -23,68 +25,59 @@
     
     [gmapView addSubview:mapView];
     
-//    NSString *str=@"https://github.com/David-Haim/CountriesToCitiesJSON/blob/master/countriesToCities.json";
-//    NSURL *url=[NSURL URLWithString:str];
-//    NSData *data=[NSData dataWithContentsOfURL:url];
-//    NSError *error=nil;
-//    id response=[NSJSONSerialization JSONObjectWithData:data options:
-//                 NSJSONReadingMutableContainers error:&error];
-//    
-//    NSLog(@"Your JSON Object: %@ Or Error is: %@", response, error);
-//    
-//    NSError* e;
-//    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:nil error:&e];
-//    
-    
+    _autocompleteView = [TRAutocompleteView autocompleteViewBindedTo:textFie
+                                                         usingSource:[[TRGoogleMapsAutocompleteItemsSource alloc] initWithMinimumCharactersToTrigger:2 apiKey:@"AIzaSyD0gbTbmU7DyoIdCWwJqQR_m1apZZtUBNo"]
+                                                         cellFactory:[[TRGoogleMapsAutocompletionCellFactory alloc] initWithCellForegroundColor:[UIColor lightGrayColor] fontSize:14]
+                                                        presentingIn:self];
   
 
     
 
      recipes = [NSMutableArray arrayWithObjects:@"Dhaka",@"Chittagong",@"Dahagram",  nil];
-    tb = [[UITableView alloc] initWithFrame:CGRectMake(0,55,414,115) style:UITableViewStylePlain] ;
     
-    tb.dataSource = self;
-    tb.delegate = self;
-    searchBar.delegate=self;
+   _autocompleteView.topMargin = -5;
+    
+    
+    _autocompleteView.didAutocompleteWith = ^(id<TRSuggestionItem> item)
+    {
+        NSLog(@"Autocompleted with: %@", item.completionText);
+        [self getLocationFromAddressString:item.completionText];
+    };
+    
     //[self.view addSubview:tb];
 }
 
-- (void)searchDisplayController:(UISearchDisplayController *)controller didShowSearchResultsTableView:(UITableView *)tableView  {
-    
-    tableView.frame = self.tb.frame;
-    
-    
-}
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
-        return [searchResults count];
-        
-    } else {
-        return [recipes count];
-        
-    }
-}
 //Table one : Table name: Add group Table Fields: Group Name, Number of members, Dates, LocationID
 //Table two:LocationID, location order, latitude, longitude, zoom
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *simpleTableIdentifier = @"RecipeCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+-(void) getLocationFromAddressString: (NSString*) addressStr {
+    double latitude = 0, longitude = 0;
+    NSString *esc_addr =  [addressStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *req = [NSString stringWithFormat:@"http://maps.google.com/maps/api/geocode/json?sensor=false&address=%@", esc_addr];
+    NSString *result = [NSString stringWithContentsOfURL:[NSURL URLWithString:req] encoding:NSUTF8StringEncoding error:NULL];
+    if (result) {
+        NSScanner *scanner = [NSScanner scannerWithString:result];
+        if ([scanner scanUpToString:@"\"lat\" :" intoString:nil] && [scanner scanString:@"\"lat\" :" intoString:nil]) {
+            [scanner scanDouble:&latitude];
+            if ([scanner scanUpToString:@"\"lng\" :" intoString:nil] && [scanner scanString:@"\"lng\" :" intoString:nil]) {
+                [scanner scanDouble:&longitude];
+            }
+        }
     }
     
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
-        cell.textLabel.text = [searchResults objectAtIndex:indexPath.row];
-    } else {
-        cell.textLabel.text = [recipes objectAtIndex:indexPath.row];
-    }
+    [mapView removeFromSuperview];
+    camera = [GMSCameraPosition cameraWithLatitude:latitude
+                                         longitude:longitude
+                                              zoom:10];
+    mapView = [GMSMapView mapWithFrame:gmapView.bounds camera:camera];
+    mapView.myLocationEnabled = YES;
     
-    return cell;
+    
+    
+    [gmapView addSubview:mapView];
+    
+  
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -140,48 +133,11 @@
     }
 }
 
-- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
-{
-    NSPredicate *resultPredicate = [NSPredicate
-                                    predicateWithFormat:@"SELF contains[cd] %@",
-                                    searchText];
-    
-    searchResults = [recipes filteredArrayUsingPredicate:resultPredicate];
-}
-
-#pragma mark - UISearchDisplayController delegate methods
--(BOOL)searchDisplayController:(UISearchDisplayController *)controller
-shouldReloadTableForSearchString:(NSString *)searchString
-{
-    [self filterContentForSearchText:searchString
-                               scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
-                                      objectAtIndex:[self.searchDisplayController.searchBar
-                                                     selectedScopeButtonIndex]]];
-    
-    return YES;
-}
-
-
--(void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
-{
-    controller.active = YES;
-    
-    
-}
 
 
 
-- (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
-{
-    controller.active=NO;
-    
-}
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"showRecipeDetail"]) {
-       
-    }
-    
-}
+
+
 
 
 @end

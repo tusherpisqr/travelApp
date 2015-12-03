@@ -9,8 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "SACalendar.h"
+#import <GoogleMaps/GoogleMaps.h>
+#import "TRAutocompleteView.h"
+#import "TRGoogleMapsAutocompleteItemsSource.h"
+#import "TRGoogleMapsAutocompletionCellFactory.h"
+@import GoogleMaps;
 
-@interface CreateGroupTwo : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,SACalendarDelegate,UIAlertViewDelegate>
+
+@interface CreateGroupTwo : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,SACalendarDelegate,UIAlertViewDelegate,GMSMapViewDelegate>
 {
     int num;
     NSMutableArray *recipes;
@@ -18,7 +24,10 @@
     UIView* newView;
     NSMutableData* responseData;
     __weak IBOutlet UIView *lowerView;
+    TRAutocompleteView *_autocompleteView;
 }
+
+@property ( nonatomic)  UITextField *textFie;
 @property (weak, nonatomic) IBOutlet UITextField *txtGroupName;
 @property (weak, nonatomic) IBOutlet UITextField *txtMemberNumber;
 @property (weak, nonatomic) IBOutlet UIButton *addRow;

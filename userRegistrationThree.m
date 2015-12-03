@@ -1,9 +1,4 @@
-//
-//  userRegistrationThree.m
-//  travel app new
-//
-//  Created by ashraf ul alam tusher on 11/30/15.
-//  Copyright © 2015 tusher. All rights reserved.
+
 //
 
 #import "userRegistrationThree.h"

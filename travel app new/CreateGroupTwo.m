@@ -33,6 +33,8 @@
     [self adjustHeightOfTableview];
 }
 
+
+
 - (void)adjustHeightOfTableview
 {
     CGFloat height = self.tableView.contentSize.height;
@@ -122,28 +124,40 @@
 }
 -(void)add{
     
-    UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Keyword Search"
-                                                           message:@""
-                                                          delegate:self
-                                                 cancelButtonTitle:nil
-                                                 otherButtonTitles:@"Search", nil] ;
+    newView = [[UIView alloc] initWithFrame:self.view.bounds];
+    newView.backgroundColor=[UIColor grayColor];
+    CGRect frame=CGRectMake(0, 100, newView.frame.size.width, 50);
+    _textFie=[[UITextField alloc]initWithFrame:frame];
+    _textFie = [[UITextField alloc]initWithFrame:CGRectMake(0, 67
+                                                            , newView.frame.size.width, 50)];
+    _textFie.borderStyle = UITextBorderStyleNone;
+    _textFie.backgroundColor = [UIColor whiteColor];
+    [newView addSubview:_textFie];
     
-    myAlertView.delegate=self;
+    _autocompleteView = [TRAutocompleteView autocompleteViewBindedTo:_textFie
+                                                         usingSource:[[TRGoogleMapsAutocompleteItemsSource alloc] initWithMinimumCharactersToTrigger:2 apiKey:@"AIzaSyD0gbTbmU7DyoIdCWwJqQR_m1apZZtUBNo"]
+                                                         cellFactory:[[TRGoogleMapsAutocompletionCellFactory alloc] initWithCellForegroundColor:[UIColor lightGrayColor] fontSize:14]
+                                                        presentingIn:self];
     
-    myAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-    [myAlertView show];
-   
+    
+    
+    _autocompleteView.didAutocompleteWith = ^(id<TRSuggestionItem> item)
+    {
+        NSLog(@"Autocompleted with: %@", item.completionText);
+        [recipes addObject:item.completionText];
+        
+        [tableView reloadData];
+        [self adjustHeightOfTableview];
+        [newView removeFromSuperview];
+    };
+
+    [self.view addSubview:newView];
+    
+       
     
 }
 
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    NSString *searchTerm = [alertView textFieldAtIndex:0].text;
-    [recipes addObject:searchTerm];
-    
-    [tableView reloadData];
-    [self adjustHeightOfTableview];
- 
-}
+
 - (IBAction)addGroupAction:(id)sender {
     
     NSString* device_token=@"123456";

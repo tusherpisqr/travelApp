@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //UINavigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
         // UINavigationBar.appearance().barTintColor = UIColor.whiteColor()
         UINavigationBar.appearance().backItem?.title = nil
-        GMSServices.provideAPIKey("AIzaSyBYhoa6sjvu1ICVnAKVIaWdxKmiH8JnVlY");
+        GMSServices.provideAPIKey("AIzaSyCMpXEwpmeAkhLqXdSZ0vHJe0EtVXocgWw");
         return true
     }
 

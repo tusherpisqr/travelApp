@@ -7,19 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TRAutocompleteView.h"
 @import GoogleMaps;
 
-@interface homeSearchTwo : UIViewController<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,UISearchDisplayDelegate>{
+@interface homeSearchTwo : UIViewController{
     GMSMapView* mapView;
     NSMutableArray *recipes;
     NSMutableArray *searchResults;
     GMSCameraPosition* camera;
+    GMSPlacesClient* client;
+    TRAutocompleteView *_autocompleteView;
 }
 @property (weak, nonatomic) IBOutlet UIView *gmapView;
 
-@property (nonatomic, strong) UITableView *tb;
 
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
+
+@property (weak, nonatomic) IBOutlet UITextField *textFie;
 
 
 @end
