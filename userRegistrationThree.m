@@ -202,6 +202,8 @@
         
         [prefs2 setObject:username forKey:@"username"];
         
+        [prefs2 setObject:sessionId forKey:@"session_id"];
+        
         [prefs2 setObject:password forKey:@"pass"];
         
         [prefs2 setObject:email forKey:@"email"];

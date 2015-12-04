@@ -30,7 +30,7 @@
 {
     [super viewDidAppear:animated];
     
-    [self adjustHeightOfTableview];
+  //  [self adjustHeightOfTableview];
 }
 
 
@@ -39,7 +39,7 @@
 {
     CGFloat height = self.tableView.contentSize.height;
     CGFloat oldHeight=self.tableView.frame.size.height;
-    CGFloat maxHeight = self.tableView.superview.frame.size.height - self.tableView.frame.origin.y-300;
+    CGFloat maxHeight = self.tableView.superview.frame.size.height - self.tableView.frame.origin.y-230;
     
     int g=0;
     
@@ -160,20 +160,63 @@
 
 - (IBAction)addGroupAction:(id)sender {
     
-    NSString* device_token=@"123456";
+
     
     NSString *aValue = [[NSUserDefaults standardUserDefaults] objectForKey:@"session_id"];
    
    
     
-    NSString* session_id=@"241702411";
+    NSString* session_id=aValue;
    
-    CLLocationCoordinate2D center;
-    center=[self getLocationFromAddressString:@"Chittagong"];
-    double  latFrom=center.latitude;
-    double  lonFrom=center.longitude;
     
-    NSString *post = [NSString stringWithFormat:@"session_id=%@&longitude=%f&latitude=%f&zoom=%d",session_id,lonFrom,latFrom,10];
+   
+    
+    NSMutableArray *order_by=[[NSMutableArray alloc] init];
+    NSMutableArray *lats=[[NSMutableArray alloc]init];
+    NSMutableArray *longs=[[NSMutableArray alloc]init];
+    NSMutableArray *zoom=[[NSMutableArray alloc]init];
+    
+    NSString* group_name=txtGroupName.text;
+    
+    NSString* descr=txtGroupName.text;
+    NSString* date=txtDate.text;
+    NSString* groupmember=txtMemberNumber.text;
+    
+    NSString *kpost = [NSString stringWithFormat:@"session_id=%@&title=%@&description=%@&travel_date=%@&member_limit=%@",session_id,group_name,descr,date,groupmember];
+    
+    NSMutableString *post=[[NSMutableString alloc]initWithString:kpost];
+    
+    int orderby=1;
+    
+    for (NSString* name in recipes) {
+        CLLocationCoordinate2D center;
+        center=[self getLocationFromAddressString:name];
+        double  latFrom=center.latitude;
+        double  lonFrom=center.longitude;
+        
+        NSLog(@"View Controller get Location Logitute : %f",latFrom);
+        NSLog(@"View Controller get Location Latitute : %f",lonFrom);
+        
+//        NSString *kposttwo = [NSString stringWithFormat:@"order_by[]=%@&longitude[]=%@&latitude[]=%@&zoom[]=%@",[NSNumber numberWithInt:orderby],[NSNumber numberWithDouble:latFrom],[NSNumber numberWithDouble:lonFrom],[NSNumber numberWithInt:10]];
+//        
+//        [post appendString:kposttwo];
+        
+        [order_by addObject:[NSNumber numberWithInt:orderby]];
+        [lats addObject:[NSNumber numberWithDouble:latFrom]];
+        [longs addObject:[NSNumber numberWithDouble:lonFrom]];
+        [zoom addObject:[NSNumber numberWithInt:10]];
+        orderby++;
+    }
+    
+    int i=0;
+    for (NSString* order in order_by) {
+        NSString *kposttwo = [NSString stringWithFormat:@"&order_by[%d]=%@&longitude[%d]=%@&latitude[%d]=%@&zoom[%d]=%@&",i,order_by[i],i,lats[i],i,longs[i],i,zoom[i]];
+        
+        [post appendString:kposttwo];
+        i++;
+
+    }
+    
     
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
@@ -181,7 +224,7 @@
     
     NSMutableURLRequest *requestT = [[NSMutableURLRequest alloc] init] ;
     
-    [requestT setURL:[NSURL URLWithString:@"http://travel.cityu.me/travelgroups/addGroup/"]];
+    [requestT setURL:[NSURL URLWithString:@"http://travelapp.cityu.me/travelgroups/addGroup/"]];
     
     [requestT setHTTPMethod:@"POST"];
     
@@ -205,15 +248,7 @@
 
     
     
-    for (NSString* name in recipes) {
-        CLLocationCoordinate2D center;
-        center=[self getLocationFromAddressString:name];
-        double  latFrom=center.latitude;
-        double  lonFrom=center.longitude;
-        
-        NSLog(@"View Controller get Location Logitute : %f",latFrom);
-        NSLog(@"View Controller get Location Latitute : %f",lonFrom);
-    }
+    
 
 }
 
@@ -319,7 +354,59 @@
     
    
     
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseData options:nil error:&e];
+    
+    
+    NSDictionary* meta=[dict objectForKey:@"meta"];
+    
+    NSString* code=(NSString*)[[meta objectForKey:@"status"]stringValue];
+    
+    
+    
+    if ([code isEqualToString: @"100"]) {
+        
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle:@"Validation Error"
+                                      message:@""
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        
+        
+        UIAlertAction* noButton = [UIAlertAction
+                                   actionWithTitle:@"Close"
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action)
+                                   {
+                                       [alert dismissViewControllerAnimated:YES completion:nil];
+                                       
+                                   }];
+        
+        
+        [alert addAction:noButton];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        
     }
+    
+        
+    if([code isEqualToString: @"200"]){
+        NSDictionary *dict2=(NSDictionary*)[dict objectForKey:@"response"];
+        
+        NSString* username=(NSString*)[dict2 objectForKey:@"title"];
+        
+        NSUserDefaults *prefs2 = [NSUserDefaults standardUserDefaults];
+        
+        [prefs2 setObject:username forKey:@"group_name"];
+        
+        
+        
+        
+        [prefs2 synchronize];
+        
+        
+        NSLog(@"success");
+    }
+}
+
 
 
 @end
