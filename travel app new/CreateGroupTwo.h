@@ -25,6 +25,7 @@
     NSMutableData* responseData;
     __weak IBOutlet UIView *lowerView;
     TRAutocompleteView *_autocompleteView;
+    BOOL ab;
 }
 
 @property ( nonatomic)  UITextField *textFie;

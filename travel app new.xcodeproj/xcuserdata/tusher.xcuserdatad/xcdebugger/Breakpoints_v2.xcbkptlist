@@ -20,31 +20,16 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "travel_app_new.TableViewCellOne.__deallocating_deinit"
-                  moduleName = "travel app new"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tusher/Desktop/travel%20app%20new%202/travel%20app%20new/TableViewCellOne.swift"
-                  timestampString = "470926093.598434"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
                   symbolName = "travel_app_new.TableViewCellOne.init (travel_app_new.TableViewCellOne.Type)(style : __C.UITableViewCellStyle, reuseIdentifier : Swift.Optional&lt;Swift.String&gt;) -&gt; travel_app_new.TableViewCellOne"
                   moduleName = "travel app new"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/tusher/Desktop/travel%20app%20new%202/travel%20app%20new/TableViewCellOne.swift"
-                  timestampString = "470926093.599048"
+                  timestampString = "471009768.729236"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "72">
+                  offsetFromSymbolStart = "58">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -54,12 +39,12 @@
                   moduleName = "travel app new"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/tusher/Desktop/travel%20app%20new%202/travel%20app%20new/TableViewCellOne.swift"
-                  timestampString = "470926093.599539"
+                  timestampString = "471009768.730103"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "28">
+                  offsetFromSymbolStart = "19">
                </Location>
             </Locations>
          </BreakpointContent>

@@ -19,7 +19,7 @@
     [[self tableView] setEditing:YES animated:YES];
     recipes = [[NSMutableArray alloc]init];
  
-    
+     ab=NO;
  
     txtGroupName.delegate=self;
     txtDate.delegate=self;
@@ -39,7 +39,7 @@
 {
     CGFloat height = self.tableView.contentSize.height;
     CGFloat oldHeight=self.tableView.frame.size.height;
-    CGFloat maxHeight = self.tableView.superview.frame.size.height - self.tableView.frame.origin.y-230;
+    CGFloat maxHeight = self.tableView.superview.frame.size.height - self.tableView.frame.origin.y-300;
     
     int g=0;
     
@@ -398,15 +398,22 @@
         [prefs2 setObject:username forKey:@"group_name"];
         
         
-        
+        ab=YES;
         
         [prefs2 synchronize];
         
-        
+        [self performSegueWithIdentifier:@"showGroup" sender:self];
         NSLog(@"success");
     }
 }
 
-
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    if (ab==YES) {
+        return YES;
+    }
+    else{
+        return NO;
+    }
+}
 
 @end
