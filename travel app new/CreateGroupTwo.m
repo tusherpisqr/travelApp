@@ -39,7 +39,7 @@
 {
     CGFloat height = self.tableView.contentSize.height;
     CGFloat oldHeight=self.tableView.frame.size.height;
-    CGFloat maxHeight = self.tableView.superview.frame.size.height - self.tableView.frame.origin.y-300;
+    CGFloat maxHeight = self.tableView.superview.frame.size.height - self.tableView.frame.origin.y-lowerView.frame.size.height;
     
     int g=0;
     
@@ -135,7 +135,7 @@
     [newView addSubview:_textFie];
     
     _autocompleteView = [TRAutocompleteView autocompleteViewBindedTo:_textFie
-                                                         usingSource:[[TRGoogleMapsAutocompleteItemsSource alloc] initWithMinimumCharactersToTrigger:2 apiKey:@"AIzaSyD0gbTbmU7DyoIdCWwJqQR_m1apZZtUBNo"]
+                                                         usingSource:[[TRGoogleMapsAutocompleteItemsSource alloc] initWithMinimumCharactersToTrigger:2 apiKey:@"AIzaSyBbzjhDtPMh6z0h1LqqijxifTEsEXMbaTw"]
                                                          cellFactory:[[TRGoogleMapsAutocompletionCellFactory alloc] initWithCellForegroundColor:[UIColor lightGrayColor] fontSize:14]
                                                         presentingIn:self];
     

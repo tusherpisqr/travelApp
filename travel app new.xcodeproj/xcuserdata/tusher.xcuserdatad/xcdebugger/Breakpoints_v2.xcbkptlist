@@ -24,12 +24,12 @@
                   moduleName = "travel app new"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/tusher/Desktop/travel%20app%20new%202/travel%20app%20new/TableViewCellOne.swift"
-                  timestampString = "471009768.729236"
+                  timestampString = "471159670.245664"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "58">
+                  offsetFromSymbolStart = "64">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -39,12 +39,12 @@
                   moduleName = "travel app new"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/tusher/Desktop/travel%20app%20new%202/travel%20app%20new/TableViewCellOne.swift"
-                  timestampString = "471009768.730103"
+                  timestampString = "471159670.245985"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "19">
+                  offsetFromSymbolStart = "27">
                </Location>
             </Locations>
          </BreakpointContent>

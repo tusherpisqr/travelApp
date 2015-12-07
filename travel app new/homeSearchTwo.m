@@ -26,7 +26,7 @@
     [gmapView addSubview:mapView];
     
     _autocompleteView = [TRAutocompleteView autocompleteViewBindedTo:textFie
-                                                         usingSource:[[TRGoogleMapsAutocompleteItemsSource alloc] initWithMinimumCharactersToTrigger:2 apiKey:@"AIzaSyD0gbTbmU7DyoIdCWwJqQR_m1apZZtUBNo"]
+                                                         usingSource:[[TRGoogleMapsAutocompleteItemsSource alloc] initWithMinimumCharactersToTrigger:2 apiKey:@"AIzaSyBbzjhDtPMh6z0h1LqqijxifTEsEXMbaTw"]
                                                          cellFactory:[[TRGoogleMapsAutocompletionCellFactory alloc] initWithCellForegroundColor:[UIColor lightGrayColor] fontSize:14]
                                                         presentingIn:self];
   
