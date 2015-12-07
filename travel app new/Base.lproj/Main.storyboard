@@ -647,7 +647,6 @@
                     <connections>
                         <outlet property="btnJoin" destination="xrS-B1-LbM" id="EhI-vx-DZY"/>
                         <outlet property="gmapView" destination="QI9-cE-EJq" id="c3s-0M-72t"/>
-                        <outlet property="joinGroup" destination="xrS-B1-LbM" id="7Oc-3E-D9O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8fp-2A-44k" userLabel="First Responder" sceneMemberID="firstResponder"/>
