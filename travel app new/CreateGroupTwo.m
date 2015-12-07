@@ -399,7 +399,7 @@
         
         NSString* group_id=(NSString*)[dict2 objectForKey:@"id"];
         
-        locationString=(NSString*)[dict2 objectForKey:@"location_name"];
+       // locationString=(NSString*)[dict2 objectForKey:@"location_name"];
         
        
         
