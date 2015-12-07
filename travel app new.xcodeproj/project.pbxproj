@@ -33,6 +33,7 @@
 		38DAB4F11C09CD9D0033920F /* homeSearchTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DAB4F01C09CD9D0033920F /* homeSearchTwo.m */; };
 		38DBEF8B1C08776F004F5300 /* TableViewCellOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DBEF891C08776F004F5300 /* TableViewCellOne.swift */; };
 		38DBEF8C1C08776F004F5300 /* TableViewCellOne.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38DBEF8A1C08776F004F5300 /* TableViewCellOne.xib */; };
+		38E1ABC81C1599D900C5E955 /* GroupDetailsTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E1ABC71C1599D900C5E955 /* GroupDetailsTwo.m */; };
 		38E25BD51C104C6D009EE983 /* TRAutocompleteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E25BC91C104C6D009EE983 /* TRAutocompleteView.m */; };
 		38E25BD61C104C6D009EE983 /* TRGoogleMapsAutocompleteItemsSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E25BCC1C104C6D009EE983 /* TRGoogleMapsAutocompleteItemsSource.m */; };
 		38E25BD71C104C6D009EE983 /* TRGoogleMapsAutocompletionCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E25BCE1C104C6D009EE983 /* TRGoogleMapsAutocompletionCellFactory.m */; };
@@ -105,6 +106,8 @@
 		38DAB4F01C09CD9D0033920F /* homeSearchTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = homeSearchTwo.m; sourceTree = "<group>"; };
 		38DBEF891C08776F004F5300 /* TableViewCellOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellOne.swift; sourceTree = "<group>"; };
 		38DBEF8A1C08776F004F5300 /* TableViewCellOne.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCellOne.xib; sourceTree = "<group>"; };
+		38E1ABC61C1599D800C5E955 /* GroupDetailsTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupDetailsTwo.h; sourceTree = "<group>"; };
+		38E1ABC71C1599D900C5E955 /* GroupDetailsTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupDetailsTwo.m; sourceTree = "<group>"; };
 		38E25BC71C104C6D009EE983 /* TRAutocompleteItemsSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRAutocompleteItemsSource.h; sourceTree = "<group>"; };
 		38E25BC81C104C6D009EE983 /* TRAutocompleteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRAutocompleteView.h; sourceTree = "<group>"; };
 		38E25BC91C104C6D009EE983 /* TRAutocompleteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRAutocompleteView.m; sourceTree = "<group>"; };
@@ -284,6 +287,8 @@
 				38DAB4F01C09CD9D0033920F /* homeSearchTwo.m */,
 				38E796371C0C45DD00471591 /* CreateGroupTwo.h */,
 				38E796381C0C45DD00471591 /* CreateGroupTwo.m */,
+				38E1ABC61C1599D800C5E955 /* GroupDetailsTwo.h */,
+				38E1ABC71C1599D900C5E955 /* GroupDetailsTwo.m */,
 			);
 			path = "travel app new";
 			sourceTree = "<group>";
@@ -530,6 +535,7 @@
 				18D201211BFF524D0079FA8C /* groupList.swift in Sources */,
 				18D2012E1BFF8A440079FA8C /* sampleData.swift in Sources */,
 				18D201171BFF4DF00079FA8C /* groupSettings.swift in Sources */,
+				38E1ABC81C1599D900C5E955 /* GroupDetailsTwo.m in Sources */,
 				18D201151BFF4D860079FA8C /* groupChat.swift in Sources */,
 				38E25BDA1C104C6D009EE983 /* TRTextFieldExtensions.m in Sources */,
 				38DAB4F11C09CD9D0033920F /* homeSearchTwo.m in Sources */,

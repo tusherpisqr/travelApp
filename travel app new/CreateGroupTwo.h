@@ -14,7 +14,7 @@
 #import "TRGoogleMapsAutocompleteItemsSource.h"
 #import "TRGoogleMapsAutocompletionCellFactory.h"
 @import GoogleMaps;
-
+@class homeSearchTwo;
 
 @interface CreateGroupTwo : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,SACalendarDelegate,UIAlertViewDelegate,GMSMapViewDelegate>
 {
@@ -26,6 +26,9 @@
     __weak IBOutlet UIView *lowerView;
     TRAutocompleteView *_autocompleteView;
     BOOL ab;
+    double latitude;
+    double longitude;
+    NSString* locationString;
 }
 
 @property ( nonatomic)  UITextField *textFie;

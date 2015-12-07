@@ -11,20 +11,45 @@
 #import "TRGoogleMapsAutocompletionCellFactory.h"
 
 @implementation homeSearchTwo
-@synthesize gmapView,textFie;
+@synthesize gmapView,textFie,latitude,longitude;
+-(void)viewWillAppear:(BOOL)animated{
+    [self.navigationItem setHidesBackButton:YES animated:YES];
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [self.navigationItem setHidesBackButton:YES animated:YES];
+}
+-(BOOL)textFieldShouldReturn:(UITextField*)textField;
+{
+    [textField resignFirstResponder];
+    
+    return NO;
+}
 -(void)viewDidLoad{
     NSLog(@"abc");
+    textFie.delegate=self;
+    [textFie becomeFirstResponder];
     // Do any additional setup after loading the view.
-    camera = [GMSCameraPosition cameraWithLatitude:-32.8683
-                                                            longitude:151.2086
+    double a=-32.8683;
+    double b=151.2086;
+    if (_locationString!=nil) {
+       CLLocationCoordinate2D ab= [self getLocationFromAddressString:_locationString];
+       // [mapView animateToLocation:ab];
+    }
+    else{
+    camera = [GMSCameraPosition cameraWithLatitude:a
+                                                            longitude:b
                                                                  zoom:10];
     mapView = [GMSMapView mapWithFrame:gmapView.bounds camera:camera];
     mapView.myLocationEnabled = YES;
-    
-    
+        CLLocationCoordinate2D position = CLLocationCoordinate2DMake(10, 10);
+        GMSMarker *marker = [GMSMarker markerWithPosition:position];
+        marker.title = @"";
+        marker.map = mapView;
+        
+   
     
     [gmapView addSubview:mapView];
-    
+    }
     _autocompleteView = [TRAutocompleteView autocompleteViewBindedTo:textFie
                                                          usingSource:[[TRGoogleMapsAutocompleteItemsSource alloc] initWithMinimumCharactersToTrigger:2 apiKey:@"AIzaSyBbzjhDtPMh6z0h1LqqijxifTEsEXMbaTw"]
                                                          cellFactory:[[TRGoogleMapsAutocompletionCellFactory alloc] initWithCellForegroundColor:[UIColor lightGrayColor] fontSize:14]
@@ -47,10 +72,9 @@
     //[self.view addSubview:tb];
 }
 
-//Table one : Table name: Add group Table Fields: Group Name, Number of members, Dates, LocationID
-//Table two:LocationID, location order, latitude, longitude, zoom
 
--(void) getLocationFromAddressString: (NSString*) addressStr {
+
+-(CLLocationCoordinate2D) getLocationFromAddressString: (NSString*) addressStr {
     double latitude = 0, longitude = 0;
     NSString *esc_addr =  [addressStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *req = [NSString stringWithFormat:@"http://maps.google.com/maps/api/geocode/json?sensor=false&address=%@", esc_addr];
@@ -75,7 +99,7 @@
     
     
     [gmapView addSubview:mapView];
-    
+    return CLLocationCoordinate2DMake(latitude, longitude);
   
     
 }

@@ -24,6 +24,10 @@
     
 }
 
+-(void)viewDidDisappear:(BOOL)animated{
+    [self.navigationItem setHidesBackButton:YES animated:YES];
+}
+
 -(void)dismissKeyboard {
     [txtUser resignFirstResponder];
     [txtPassword resignFirstResponder];

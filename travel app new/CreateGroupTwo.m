@@ -7,13 +7,14 @@
 //
 
 #import "CreateGroupTwo.h"
-
+#import "homeSearchTwo.h"
 
 @implementation CreateGroupTwo
 
 @synthesize txtDate,txtGroupName,txtMemberNumber,tableView,addRow;
 
 -(void)viewDidLoad{
+    [self.navigationItem setHidesBackButton:YES animated:YES];
     num=0;
     [addRow addTarget:self action:@selector(add) forControlEvents:UIControlEventTouchUpInside];
     [[self tableView] setEditing:YES animated:YES];
@@ -23,6 +24,7 @@
  
     txtGroupName.delegate=self;
     txtDate.delegate=self;
+    _textFie.delegate=self;
 
 }
 
@@ -39,7 +41,7 @@
 {
     CGFloat height = self.tableView.contentSize.height;
     CGFloat oldHeight=self.tableView.frame.size.height;
-    CGFloat maxHeight = self.tableView.superview.frame.size.height - self.tableView.frame.origin.y-lowerView.frame.size.height;
+    CGFloat maxHeight = ( lowerView.frame.origin.y- self.tableView.frame.origin.y);
     
     int g=0;
     
@@ -125,13 +127,16 @@
 -(void)add{
     
     newView = [[UIView alloc] initWithFrame:self.view.bounds];
-    newView.backgroundColor=[UIColor grayColor];
-    CGRect frame=CGRectMake(0, 100, newView.frame.size.width, 50);
+    newView.center=self.view.center;
+    newView.backgroundColor=[UIColor whiteColor];
+    CGRect frame=CGRectMake(100, 100, newView.frame.size.width, 50);
     _textFie=[[UITextField alloc]initWithFrame:frame];
     _textFie = [[UITextField alloc]initWithFrame:CGRectMake(0, 67
                                                             , newView.frame.size.width, 50)];
-    _textFie.borderStyle = UITextBorderStyleNone;
+    _textFie.borderStyle = UITextBorderStyleRoundedRect;
     _textFie.backgroundColor = [UIColor whiteColor];
+    _textFie.placeholder=@"Search cities";
+    [_textFie becomeFirstResponder];
     [newView addSubview:_textFie];
     
     _autocompleteView = [TRAutocompleteView autocompleteViewBindedTo:_textFie
@@ -175,6 +180,7 @@
     NSMutableArray *lats=[[NSMutableArray alloc]init];
     NSMutableArray *longs=[[NSMutableArray alloc]init];
     NSMutableArray *zoom=[[NSMutableArray alloc]init];
+    NSMutableArray *places=[[NSMutableArray alloc]init];
     
     NSString* group_name=txtGroupName.text;
     
@@ -200,7 +206,7 @@
 //        NSString *kposttwo = [NSString stringWithFormat:@"order_by[]=%@&longitude[]=%@&latitude[]=%@&zoom[]=%@",[NSNumber numberWithInt:orderby],[NSNumber numberWithDouble:latFrom],[NSNumber numberWithDouble:lonFrom],[NSNumber numberWithInt:10]];
 //        
 //        [post appendString:kposttwo];
-        
+        [places addObject:name];
         [order_by addObject:[NSNumber numberWithInt:orderby]];
         [lats addObject:[NSNumber numberWithDouble:latFrom]];
         [longs addObject:[NSNumber numberWithDouble:lonFrom]];
@@ -210,7 +216,7 @@
     
     int i=0;
     for (NSString* order in order_by) {
-        NSString *kposttwo = [NSString stringWithFormat:@"&order_by[%d]=%@&longitude[%d]=%@&latitude[%d]=%@&zoom[%d]=%@&",i,order_by[i],i,lats[i],i,longs[i],i,zoom[i]];
+        NSString *kposttwo = [NSString stringWithFormat:@"&location_name[%d]=%@&order_by[%d]=%@&longitude[%d]=%@&latitude[%d]=%@&zoom[%d]=%@&",i,places[i],i,order_by[i],i,lats[i],i,longs[i],i,zoom[i]];
         
         [post appendString:kposttwo];
         i++;
@@ -391,16 +397,22 @@
     if([code isEqualToString: @"200"]){
         NSDictionary *dict2=(NSDictionary*)[dict objectForKey:@"response"];
         
-        NSString* username=(NSString*)[dict2 objectForKey:@"title"];
+        NSString* group_id=(NSString*)[dict2 objectForKey:@"id"];
+        
+        locationString=(NSString*)[dict2 objectForKey:@"location_name"];
+        
+       
         
         NSUserDefaults *prefs2 = [NSUserDefaults standardUserDefaults];
         
-        [prefs2 setObject:username forKey:@"group_name"];
+        [prefs2 setObject:group_id forKey:@"group_id"];
         
         
         ab=YES;
         
         [prefs2 synchronize];
+        
+       // self.tabBarController.selectedIndex = 1;
         
         [self performSegueWithIdentifier:@"showGroup" sender:self];
         NSLog(@"success");
@@ -413,6 +425,22 @@
     }
     else{
         return NO;
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Make sure your segue name in storyboard is the same as this line
+    if ([[segue identifier] isEqualToString:@"showGroup"])
+    {
+//        homeSearchTwo *vc = [segue destinationViewController];
+//        
+//                [vc setLatitude:[NSNumber numberWithDouble:latitude]];
+//        [vc setLongitude:[NSNumber numberWithDouble:longitude]];
+//        [vc setLocationString:locationString];
+        // Pass any objects to the view controller here, like...
+        
+        
     }
 }
 

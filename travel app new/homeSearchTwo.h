@@ -10,18 +10,22 @@
 #import "TRAutocompleteView.h"
 @import GoogleMaps;
 
-@interface homeSearchTwo : UIViewController{
+@interface homeSearchTwo : UIViewController<UITextFieldDelegate>{
     GMSMapView* mapView;
     NSMutableArray *recipes;
     NSMutableArray *searchResults;
     GMSCameraPosition* camera;
     GMSPlacesClient* client;
     TRAutocompleteView *_autocompleteView;
+    
 }
 @property (weak, nonatomic) IBOutlet UIView *gmapView;
 
+@property (strong, nonatomic) NSNumber *latitude;
 
+@property (strong, nonatomic) NSNumber *longitude;
 
+@property (strong, nonatomic) NSString *locationString;
 
 @property (weak, nonatomic) IBOutlet UITextField *textFie;
 
