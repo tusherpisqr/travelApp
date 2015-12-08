@@ -109,13 +109,13 @@
     txtDate.text=date;
     
     [self->newView removeFromSuperview];
-    [txtGroupName becomeFirstResponder];
+   [self.view endEditing:YES];
     
 }
 
 // Prints out the month and year displaying on the calendar
 -(void) SACalendar:(SACalendar *)calendar didDisplayCalendarForMonth:(int)month year:(int)year{
-    NSLog(@"%02/%i",month,year);
+    
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField*)textField;
@@ -153,13 +153,12 @@
         
         [tableView reloadData];
         [self adjustHeightOfTableview];
+        
         [newView removeFromSuperview];
+        newView=nil;
     };
 
     [self.view addSubview:newView];
-    
-       
-    
 }
 
 
@@ -181,6 +180,7 @@
     NSMutableArray *longs=[[NSMutableArray alloc]init];
     NSMutableArray *zoom=[[NSMutableArray alloc]init];
     NSMutableArray *places=[[NSMutableArray alloc]init];
+    NSMutableArray *country_name=[[NSMutableArray alloc]init];
     
     NSString* group_name=txtGroupName.text;
     
@@ -188,70 +188,102 @@
     NSString* date=txtDate.text;
     NSString* groupmember=txtMemberNumber.text;
     
-    NSString *kpost = [NSString stringWithFormat:@"session_id=%@&title=%@&description=%@&travel_date=%@&member_limit=%@",session_id,group_name,descr,date,groupmember];
-    
-    NSMutableString *post=[[NSMutableString alloc]initWithString:kpost];
-    
-    int orderby=1;
-    
-    for (NSString* name in recipes) {
-        CLLocationCoordinate2D center;
-        center=[self getLocationFromAddressString:name];
-        double  latFrom=center.latitude;
-        double  lonFrom=center.longitude;
+    if (group_name.length>0&&descr.length>0&&date.length>0&&groupmember.length>0) {
+        NSString *kpost = [NSString stringWithFormat:@"session_id=%@&title=%@&description=%@&travel_date=%@&member_limit=%@",session_id,group_name,descr,date,groupmember];
         
-        NSLog(@"View Controller get Location Logitute : %f",latFrom);
-        NSLog(@"View Controller get Location Latitute : %f",lonFrom);
+        NSMutableString *post=[[NSMutableString alloc]initWithString:kpost];
         
-//        NSString *kposttwo = [NSString stringWithFormat:@"order_by[]=%@&longitude[]=%@&latitude[]=%@&zoom[]=%@",[NSNumber numberWithInt:orderby],[NSNumber numberWithDouble:latFrom],[NSNumber numberWithDouble:lonFrom],[NSNumber numberWithInt:10]];
-//        
-//        [post appendString:kposttwo];
-        [places addObject:name];
-        [order_by addObject:[NSNumber numberWithInt:orderby]];
-        [lats addObject:[NSNumber numberWithDouble:latFrom]];
-        [longs addObject:[NSNumber numberWithDouble:lonFrom]];
-        [zoom addObject:[NSNumber numberWithInt:10]];
-        orderby++;
-    }
-    
-    int i=0;
-    for (NSString* order in order_by) {
-        NSString *kposttwo = [NSString stringWithFormat:@"&location_name[%d]=%@&order_by[%d]=%@&longitude[%d]=%@&latitude[%d]=%@&zoom[%d]=%@&",i,places[i],i,order_by[i],i,lats[i],i,longs[i],i,zoom[i]];
+        int orderby=1;
         
-        [post appendString:kposttwo];
-        i++;
+        for (NSString* name in recipes) {
+            CLLocationCoordinate2D center;
+            center=[self getLocationFromAddressString:name];
+            double  latFrom=center.latitude;
+            double  lonFrom=center.longitude;
+            
+            NSLog(@"View Controller get Location Logitute : %f",latFrom);
+            NSLog(@"View Controller get Location Latitute : %f",lonFrom);
+            
+            //        NSString *kposttwo = [NSString stringWithFormat:@"order_by[]=%@&longitude[]=%@&latitude[]=%@&zoom[]=%@",[NSNumber numberWithInt:orderby],[NSNumber numberWithDouble:latFrom],[NSNumber numberWithDouble:lonFrom],[NSNumber numberWithInt:10]];
+            //
+            //        [post appendString:kposttwo];
+            
+            NSMutableString* country=[[NSMutableString alloc]initWithString:name];
+            
+            NSRange ab=[name rangeOfString:@"," options:NSBackwardsSearch];
+            int abc=ab.location;
+            
+            country=[country substringFromIndex:abc+2];
+            [country_name addObject:country];
+            [places addObject:name];
+            [order_by addObject:[NSNumber numberWithInt:orderby]];
+            [lats addObject:[NSNumber numberWithDouble:latFrom]];
+            [longs addObject:[NSNumber numberWithDouble:lonFrom]];
+            [zoom addObject:[NSNumber numberWithInt:10]];
+            orderby++;
+        }
+        
+        int i=0;
+        for (NSString* order in order_by) {
+            NSString *kposttwo = [NSString stringWithFormat:@"&place_id[%d]=%@&country[%d]=%@&location_name[%d]=%@&order_by[%d]=%@&longitude[%d]=%@&latitude[%d]=%@&zoom[%d]=%@",i,@"abc",i,country_name[i],i,places[i],i,order_by[i],i,lats[i],i,longs[i],i,zoom[i]];
+            
+            [post appendString:kposttwo];
+            i++;
+            
+        }
+        
+        
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        
+        NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+        
+        NSMutableURLRequest *requestT = [[NSMutableURLRequest alloc] init] ;
+        
+        [requestT setURL:[NSURL URLWithString:@"http://travelapp.cityu.me/travelgroups/addGroup/"]];
+        
+        [requestT setHTTPMethod:@"POST"];
+        
+        [requestT setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        
+        [requestT setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        [requestT setHTTPBody:postData];
+        
+        [self.view endEditing:YES];
+        NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:requestT delegate:self];
+        
+        if(conn) {
+            NSLog(@"Connection Successful");
+            
+        } else {
+            NSLog(@"Connection could not be made");
+            
+            
+        }
 
     }
     
-    
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    
-    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
-    
-    NSMutableURLRequest *requestT = [[NSMutableURLRequest alloc] init] ;
-    
-    [requestT setURL:[NSURL URLWithString:@"http://travelapp.cityu.me/travelgroups/addGroup/"]];
-    
-    [requestT setHTTPMethod:@"POST"];
-    
-    [requestT setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    
-    [requestT setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    
-    [requestT setHTTPBody:postData];
-    
-    [self.view endEditing:YES];
-    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:requestT delegate:self];
-    
-    if(conn) {
-        NSLog(@"Connection Successful");
-        
-    } else {
-        NSLog(@"Connection could not be made");
+    else{
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle:@"Please insert group name, date and member number"
+                                      message:@""
+                                      preferredStyle:UIAlertControllerStyleAlert];
         
         
+        UIAlertAction* noButton = [UIAlertAction
+                                   actionWithTitle:@"Close"
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action)
+                                   {
+                                       [alert dismissViewControllerAnimated:YES completion:nil];
+                                       
+                                   }];
+        
+        
+        [alert addAction:noButton];
+        
+        [self presentViewController:alert animated:YES completion:nil];
     }
-
     
     
     
@@ -399,7 +431,7 @@
         
         NSString* group_id=(NSString*)[dict2 objectForKey:@"id"];
         
-       // locationString=(NSString*)[dict2 objectForKey:@"location_name"];
+      
         
        
         
@@ -412,7 +444,7 @@
         
         [prefs2 synchronize];
         
-       // self.tabBarController.selectedIndex = 1;
+      
         
         [self performSegueWithIdentifier:@"showGroup" sender:self];
         NSLog(@"success");
@@ -433,12 +465,7 @@
     // Make sure your segue name in storyboard is the same as this line
     if ([[segue identifier] isEqualToString:@"showGroup"])
     {
-//        homeSearchTwo *vc = [segue destinationViewController];
-//        
-//                [vc setLatitude:[NSNumber numberWithDouble:latitude]];
-//        [vc setLongitude:[NSNumber numberWithDouble:longitude]];
-//        [vc setLocationString:locationString];
-        // Pass any objects to the view controller here, like...
+            
         
         
     }

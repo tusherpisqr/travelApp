@@ -1,49 +1,32 @@
 //
-//  GroupDetailsTwo.m
+//  GroupListTwo.m
 //  travel app new
 //
-//  Created by ashraf ul alam tusher on 12/7/15.
+//  Created by ashraf ul alam tusher on 12/8/15.
 //  Copyright © 2015 tusher. All rights reserved.
 //
 
+#import "GroupListTwo.h"
 #import "GroupDetailsTwo.h"
 
-@implementation GroupDetailsTwo
-
-@synthesize gmapView,btnJoin,startDate,lblMapStartDate;
+@implementation GroupListTwo
 
 -(void)viewDidLoad{
-    
-    double a=-32.8683;
-    double b=151.2086;
-    camera = [GMSCameraPosition cameraWithLatitude:a
-                                         longitude:b
-                                              zoom:10];
-    mapView = [GMSMapView mapWithFrame:gmapView.bounds camera:camera];
-    mapView.myLocationEnabled = YES;
-    
-    
-   // [j]
-    
-    [gmapView addSubview:mapView];
-    [btnJoin setHidden:YES];
-    if (startDate!=nil) {
-        lblMapStartDate.text=startDate;
-    }
+    groupCounts= [NSArray arrayWithObjects:  nil];
+    groupDetails=[NSArray arrayWithObjects: @"Group One", @"Group Two", @"Group Three", nil];
+    groupStarts=[NSArray arrayWithObjects: @"20-12-15", @"20-01-15", @"23-12-13", nil];
     
     NSString* sessionId;
     
-     sessionId = [[NSUserDefaults standardUserDefaults] objectForKey:@"session_id"];
+    sessionId = [[NSUserDefaults standardUserDefaults] objectForKey:@"session_id"];
     NSString* groupId;
     
-     groupId = [[NSUserDefaults standardUserDefaults] objectForKey:@"group_id"];
-    
-   
-    
-   
     
     
-    NSString *post = [NSString stringWithFormat:@"session_id=%@&group_id=%@",sessionId,groupId];
+    
+    
+    
+    NSString *post = [NSString stringWithFormat:@"session_id=%@",sessionId];
     
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
@@ -51,7 +34,7 @@
     
     NSMutableURLRequest *requestT = [[NSMutableURLRequest alloc] init] ;
     
-    [requestT setURL:[NSURL URLWithString:@"http://travelapp.cityu.me/travelgroups/groupDetailsByGroupId/"]];
+    [requestT setURL:[NSURL URLWithString:@"http://travelapp.cityu.me/travelgroups/getGroupList/"]];
     
     [requestT setHTTPMethod:@"POST"];
     
@@ -73,7 +56,6 @@
         
     }
 
-
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -84,7 +66,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [members count];    //count number of row from counting array hear cataGorry is An Array
+    return [groupCounts count];    //count number of row from counting array hear cataGorry is An Array
 }
 
 
@@ -99,20 +81,25 @@
     if (cell == nil)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                                      reuseIdentifier:MyIdentifier] ;
+                                       reuseIdentifier:MyIdentifier] ;
     }
     
+   
+    NSDictionary* ab=[groupCounts objectAtIndex:indexPath.row];
     
-    NSDictionary* ab=[members objectAtIndex:indexPath.row];
+    NSString* theUrl=[ab valueForKey:@"create_by_avatar"];
     
     
+    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:theUrl]];
     
-    NSString* userName=[NSString stringWithFormat:@"member Name: %@",[ab valueForKey:@"username"]];
-    cell.textLabel.text = userName;
+    cell.imageView.image=[UIImage imageWithData:imageData];
     
-    NSString* userId=[NSString stringWithFormat:@"member Id: %@",[ab valueForKey:@"user_id"]];
-    cell.detailTextLabel.text=userId;
+     NSString* titleText=[ab valueForKey:@"title"];
+    cell.textLabel.text = titleText;
     
+     NSString* userName=[ab valueForKey:@"create_by_username"];
+    cell.detailTextLabel.text=userName;
+    cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
@@ -123,6 +110,39 @@
     
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+     NSDictionary* ab=[groupCounts objectAtIndex:indexPath.row];
+    
+    
+    NSString* group_id=(NSString*)[ab objectForKey:@"group_id"];
+
+    NSUserDefaults *prefs2 = [NSUserDefaults standardUserDefaults];
+    
+    [prefs2 setObject:group_id forKey:@"group_id"];
+    
+    
+  
+    
+    [prefs2 synchronize];
+
+    
+    [self performSegueWithIdentifier:@"showDetails" sender:self];
+    
+    
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    if ([[segue identifier] isEqualToString:@"showDetails"])
+    {
+        GroupDetailsTwo *vc = [segue destinationViewController];
+        
+        
+        //        [vc setLongitude:[NSNumber numberWithDouble:longitude]];
+    }
+}
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     
@@ -182,25 +202,16 @@
     
     
     if([code isEqualToString: @"200"]){
-        NSDictionary *dict2=(NSDictionary*)[dict objectForKey:@"response"];
-        
-        NSString* travelDate=(NSString*)[dict2 objectForKey:@"travel_date"];
-        
-        
-        
-        NSArray* location=[dict2 objectForKey:@"location_list"];
-        
-        members=[dict2 objectForKey:@"group_members"];
-        
-        [tableView reloadData];
-        
-        lblMapStartDate.text=travelDate;
        
         
         
+        groupCounts=[dict objectForKey:@"response"];
         
-                NSLog(@"success");
+        [self.tableView reloadData];
+        
+        NSLog(@"success");
     }
 }
+
 
 @end

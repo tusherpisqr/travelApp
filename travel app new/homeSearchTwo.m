@@ -27,15 +27,11 @@
 -(void)viewDidLoad{
     NSLog(@"abc");
     textFie.delegate=self;
-    [textFie becomeFirstResponder];
+   
     // Do any additional setup after loading the view.
     double a=-32.8683;
     double b=151.2086;
-    if (_locationString!=nil) {
-       CLLocationCoordinate2D ab= [self getLocationFromAddressString:_locationString];
-       // [mapView animateToLocation:ab];
-    }
-    else{
+   
     camera = [GMSCameraPosition cameraWithLatitude:a
                                                             longitude:b
                                                                  zoom:10];
@@ -49,7 +45,7 @@
    
     
     [gmapView addSubview:mapView];
-    }
+    
     _autocompleteView = [TRAutocompleteView autocompleteViewBindedTo:textFie
                                                          usingSource:[[TRGoogleMapsAutocompleteItemsSource alloc] initWithMinimumCharactersToTrigger:2 apiKey:@"AIzaSyBbzjhDtPMh6z0h1LqqijxifTEsEXMbaTw"]
                                                          cellFactory:[[TRGoogleMapsAutocompletionCellFactory alloc] initWithCellForegroundColor:[UIColor lightGrayColor] fontSize:14]
@@ -69,10 +65,18 @@
         [self getLocationFromAddressString:item.completionText];
     };
     
-    //[self.view addSubview:tb];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+  //  [gmapView addGestureRecognizer:tap];
 }
 
-
+-(void)dismissKeyboard {
+    [textFie resignFirstResponder];
+  
+    
+}
 
 -(CLLocationCoordinate2D) getLocationFromAddressString: (NSString*) addressStr {
     double latitude = 0, longitude = 0;
