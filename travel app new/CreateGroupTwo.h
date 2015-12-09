@@ -14,7 +14,7 @@
 #import "TRGoogleMapsAutocompleteItemsSource.h"
 #import "TRGoogleMapsAutocompletionCellFactory.h"
 @import GoogleMaps;
-@class homeSearchTwo;
+@class GroupDetailsTwo;
 
 @interface CreateGroupTwo : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,SACalendarDelegate,UIAlertViewDelegate,GMSMapViewDelegate>
 {

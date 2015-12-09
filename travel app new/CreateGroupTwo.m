@@ -7,7 +7,8 @@
 //
 
 #import "CreateGroupTwo.h"
-#import "homeSearchTwo.h"
+#import "GroupDetailsTwo.h"
+
 
 @implementation CreateGroupTwo
 
@@ -466,7 +467,8 @@
     if ([[segue identifier] isEqualToString:@"showGroup"])
     {
             
-        
+     //   GroupDetailsTwo *vc = [segue destinationViewController];
+      //  [vc setIsHidden:@"Yes"];
         
     }
 }

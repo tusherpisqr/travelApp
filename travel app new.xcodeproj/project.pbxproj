@@ -27,6 +27,9 @@
 		38DAB4F11C09CD9D0033920F /* homeSearchTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DAB4F01C09CD9D0033920F /* homeSearchTwo.m */; };
 		38DBEF8B1C08776F004F5300 /* TableViewCellOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DBEF891C08776F004F5300 /* TableViewCellOne.swift */; };
 		38DBEF8C1C08776F004F5300 /* TableViewCellOne.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38DBEF8A1C08776F004F5300 /* TableViewCellOne.xib */; };
+		38E13A661C18082900F4154A /* aaa.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E13A651C18082900F4154A /* aaa.png */; };
+		38E13A681C181DD900F4154A /* cellDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38E13A671C181DD900F4154A /* cellDetail.xib */; };
+		38E13A6B1C181E1500F4154A /* cellDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E13A6A1C181E1500F4154A /* cellDetail.m */; };
 		38E1ABC81C1599D900C5E955 /* GroupDetailsTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E1ABC71C1599D900C5E955 /* GroupDetailsTwo.m */; };
 		38E25BD51C104C6D009EE983 /* TRAutocompleteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E25BC91C104C6D009EE983 /* TRAutocompleteView.m */; };
 		38E25BD61C104C6D009EE983 /* TRGoogleMapsAutocompleteItemsSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E25BCC1C104C6D009EE983 /* TRGoogleMapsAutocompleteItemsSource.m */; };
@@ -98,6 +101,10 @@
 		38DAB4F01C09CD9D0033920F /* homeSearchTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = homeSearchTwo.m; sourceTree = "<group>"; };
 		38DBEF891C08776F004F5300 /* TableViewCellOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellOne.swift; sourceTree = "<group>"; };
 		38DBEF8A1C08776F004F5300 /* TableViewCellOne.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCellOne.xib; sourceTree = "<group>"; };
+		38E13A651C18082900F4154A /* aaa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aaa.png; sourceTree = "<group>"; };
+		38E13A671C181DD900F4154A /* cellDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = cellDetail.xib; path = ../cellDetail.xib; sourceTree = "<group>"; };
+		38E13A691C181E1500F4154A /* cellDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cellDetail.h; path = ../cellDetail.h; sourceTree = "<group>"; };
+		38E13A6A1C181E1500F4154A /* cellDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = cellDetail.m; path = ../cellDetail.m; sourceTree = "<group>"; };
 		38E1ABC61C1599D800C5E955 /* GroupDetailsTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupDetailsTwo.h; sourceTree = "<group>"; };
 		38E1ABC71C1599D900C5E955 /* GroupDetailsTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupDetailsTwo.m; sourceTree = "<group>"; };
 		38E25BC71C104C6D009EE983 /* TRAutocompleteItemsSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRAutocompleteItemsSource.h; sourceTree = "<group>"; };
@@ -170,6 +177,7 @@
 		18D201281BFF57AD0079FA8C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				38E13A651C18082900F4154A /* aaa.png */,
 				18D201291BFF59FD0079FA8C /* group_more.png */,
 				18D201221BFF56E70079FA8C /* placeholder_profile_pic.png */,
 				18D201231BFF56E70079FA8C /* placeholder_profile_pic@2x.png */,
@@ -279,6 +287,9 @@
 				38DBEF8A1C08776F004F5300 /* TableViewCellOne.xib */,
 				38DAB4EF1C09CD9D0033920F /* homeSearchTwo.h */,
 				38DAB4F01C09CD9D0033920F /* homeSearchTwo.m */,
+				38E13A691C181E1500F4154A /* cellDetail.h */,
+				38E13A6A1C181E1500F4154A /* cellDetail.m */,
+				38E13A671C181DD900F4154A /* cellDetail.xib */,
 				38E796371C0C45DD00471591 /* CreateGroupTwo.h */,
 				38E796381C0C45DD00471591 /* CreateGroupTwo.m */,
 				38E1ABC61C1599D800C5E955 /* GroupDetailsTwo.h */,
@@ -432,6 +443,8 @@
 				80EEB86B1BFF22D90029CD94 /* LaunchScreen.storyboard in Resources */,
 				18D201271BFF56E70079FA8C /* placeholder_profile_pic@3x.png in Resources */,
 				18D201261BFF56E70079FA8C /* placeholder_profile_pic@2x.png in Resources */,
+				38E13A681C181DD900F4154A /* cellDetail.xib in Resources */,
+				38E13A661C18082900F4154A /* aaa.png in Resources */,
 				80EEB8681BFF22D90029CD94 /* Assets.xcassets in Resources */,
 				80EEB8661BFF22D90029CD94 /* Main.storyboard in Resources */,
 			);
@@ -510,6 +523,7 @@
 				38E424141C16BDA700ACEF47 /* welcomeScreen.swift in Sources */,
 				38E25BD71C104C6D009EE983 /* TRGoogleMapsAutocompletionCellFactory.m in Sources */,
 				38E796391C0C45DD00471591 /* CreateGroupTwo.m in Sources */,
+				38E13A6B1C181E1500F4154A /* cellDetail.m in Sources */,
 				38E424121C16BDA700ACEF47 /* groupDetailstable.swift in Sources */,
 				18F8363E1C04D05D00D4FF42 /* tabelViewTest.swift in Sources */,
 				18D2011B1BFF4F430079FA8C /* mainChatList.swift in Sources */,

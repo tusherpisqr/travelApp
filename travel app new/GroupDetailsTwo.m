@@ -7,30 +7,52 @@
 //
 
 #import "GroupDetailsTwo.h"
+#import "cellDetail.h"
 
 @implementation GroupDetailsTwo
 
-@synthesize gmapView,btnJoin,startDate,lblMapStartDate;
+@synthesize gmapView,btnJoin,isHidden,lblMapStartDate,btnCancelRequest,lblRequestPending,lblChatNumber,lblShareNumber;
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style: UIBarButtonItemStyleBordered target:self action:@selector(Back)];
+    self.navigationItem.leftBarButtonItem = backButton;
+}
+
+- (IBAction)Back
+{
+    [self dismissViewControllerAnimated:YES completion:nil]; // ios 6
+}
 -(void)viewDidLoad{
+    self.navigationItem.hidesBackButton=NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     double a=-32.8683;
     double b=151.2086;
+    [btnJoin setHidden:YES];
+    [btnCancelRequest setHidden:YES ];
+    [lblRequestPending setHidden:YES];
     camera = [GMSCameraPosition cameraWithLatitude:a
                                          longitude:b
                                               zoom:10];
     mapView = [GMSMapView mapWithFrame:gmapView.bounds camera:camera];
+    
     mapView.myLocationEnabled = YES;
     
-    
-   // [j]
+    tableView.allowsSelection=NO;
+   
     
     [gmapView addSubview:mapView];
-    [btnJoin setHidden:YES];
-    if (startDate!=nil) {
-        lblMapStartDate.text=startDate;
+       if ([isHidden isEqualToString:@"Yes"]) {
+        [
+         btnJoin setHidden:YES];    }
+    if ([isHidden isEqualToString:@"No"]) {
+        [
+         btnJoin setHidden:NO];
     }
     
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone; // or you have
     NSString* sessionId;
     
      sessionId = [[NSUserDefaults standardUserDefaults] objectForKey:@"session_id"];
@@ -92,36 +114,45 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *MyIdentifier = @"cell";
+    static NSString *simpleTableIdentifier = @"cellDetail";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    
+    cellDetail *cell = (cellDetail *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                                      reuseIdentifier:MyIdentifier] ;
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"cellDetail" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+        
     }
     
+    
+    
+    
+    NSString* theUrl=group_avatar;
+    
+    
+    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:theUrl]];
+    
+    cell.imgView.image=[UIImage imageWithData:imageData];
+
     
     NSDictionary* ab=[members objectAtIndex:indexPath.row];
     
     
     
+    
     NSString* userName=[NSString stringWithFormat:@"member Name: %@",[ab valueForKey:@"username"]];
-    cell.textLabel.text = userName;
+    cell.title.text = userName;
     
     NSString* userId=[NSString stringWithFormat:@"member Id: %@",[ab valueForKey:@"user_id"]];
-    cell.detailTextLabel.text=userId;
+    cell.titleDetail.text=userId;
     
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    return 80;
-    
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60;
 }
+
 
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -186,6 +217,23 @@
         
         NSString* travelDate=(NSString*)[dict2 objectForKey:@"travel_date"];
         
+        NSString* shareNum=(NSString*)[dict2 objectForKey:@"no_of_share"];
+        
+        NSString* status=(NSString*)[dict2 objectForKey:@"group_status"];
+        group_status=(int)[status longLongValue];
+        
+        NSString* Admin=(NSString*)[dict2 objectForKey:@"is_admin"];
+        int ad=(int)[Admin longLongValue];
+        
+        if (ad==0) {
+            isAdmin=NO;
+        }
+        else{
+            isAdmin=YES;
+        }
+        group_avatar=(NSString*)[dict2 objectForKey:@"admin_avatar"];
+        
+        NSString* noOfChat=(NSString*)[dict2 objectForKey:@"no_of_chat"];
         
         
         NSArray* location=[dict2 objectForKey:@"location_list"];
@@ -194,8 +242,46 @@
         
         [tableView reloadData];
         
-        lblMapStartDate.text=travelDate;
-       
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+        NSDate *orignalDate   =  [dateFormatter dateFromString:travelDate];
+        
+        [dateFormatter setDateFormat:@"MMM dd, yyyy"];
+        NSString *finalString = [dateFormatter stringFromDate:orignalDate];
+        
+        lblMapStartDate.text=finalString;
+        lblChatNumber.text=[NSString stringWithFormat:@"%@",noOfChat];
+        lblShareNumber.text=[NSString stringWithFormat:@"%@",shareNum];;
+        
+        if (isAdmin==NO) {
+            if (group_status==0) {
+                [btnJoin setHidden:NO];
+            }
+            if (group_status==2) {
+                [btnCancelRequest setHidden:NO];
+                [lblRequestPending setHidden:NO];
+            }
+        }
+        
+//        [mapView removeFromSuperview];
+//       
+//        GMSCameraPosition *cameraPosition=[GMSCameraPosition cameraWithLatitude:18.5203 longitude:73.8567 zoom:12];
+//        mapView =[GMSMapView mapWithFrame:gmapView.bounds camera:cameraPosition];
+//       
+//        mapView.myLocationEnabled=YES;
+//         [gmapView addSubview:mapView];
+//        GMSMarker *marker=[[GMSMarker alloc]init];
+//        marker.position=CLLocationCoordinate2DMake(18.5203, 73.8567);
+//        marker.icon=[UIImage imageNamed:@"aaa.png"] ;
+//        marker.groundAnchor=CGPointMake(0.5,0.5);
+//        marker.map=mapView;
+//        GMSMutablePath *path = [GMSMutablePath path];
+//        [path addCoordinate:CLLocationCoordinate2DMake(@(18.520).doubleValue,@(73.856).doubleValue)];
+//        [path addCoordinate:CLLocationCoordinate2DMake(@(18.7).doubleValue,@(73.856).doubleValue)];
+//        
+//        GMSPolyline *rectangle = [GMSPolyline polylineWithPath:path];
+//        rectangle.strokeWidth = 2.f;
+//        rectangle.map = mapView;
         
         
         

@@ -11,9 +11,7 @@
 
 @interface GroupListTwo : UITableViewController{
     NSArray* groupCounts;
-    NSArray* groupDetails;
-    NSArray* groupStarts;
-    NSMutableArray* groups;
+    
     BOOL ab;
     NSString* date;
     NSMutableData* responseData;

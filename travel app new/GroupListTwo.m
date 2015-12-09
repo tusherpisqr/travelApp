@@ -8,19 +8,34 @@
 
 #import "GroupListTwo.h"
 #import "GroupDetailsTwo.h"
+#import "cellDetail.h"
 
 @implementation GroupListTwo
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style: UIBarButtonItemStyleBordered target:self action:@selector(Back)];
+    self.navigationItem.leftBarButtonItem = backButton;
+}
+
+- (IBAction)Back
+{
+    [self dismissViewControllerAnimated:YES completion:nil]; // ios 6
+}
+
+
 -(void)viewDidLoad{
-    groupCounts= [NSArray arrayWithObjects:  nil];
-    groupDetails=[NSArray arrayWithObjects: @"Group One", @"Group Two", @"Group Three", nil];
-    groupStarts=[NSArray arrayWithObjects: @"20-12-15", @"20-01-15", @"23-12-13", nil];
+   [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+    groupCounts= [[NSArray alloc]  init];
     
     NSString* sessionId;
     
     sessionId = [[NSUserDefaults standardUserDefaults] objectForKey:@"session_id"];
-    NSString* groupId;
     
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone; // or you have the previous 'None' style...
     
     
     
@@ -66,7 +81,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [groupCounts count];    //count number of row from counting array hear cataGorry is An Array
+    return [groupCounts count];
+
 }
 
 
@@ -74,40 +90,40 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *MyIdentifier = @"cell";
+    static NSString *simpleTableIdentifier = @"cellDetail";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    
+    cellDetail *cell = (cellDetail *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                                       reuseIdentifier:MyIdentifier] ;
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"cellDetail" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+        
     }
     
    
-    NSDictionary* ab=[groupCounts objectAtIndex:indexPath.row];
     
-    NSString* theUrl=[ab valueForKey:@"create_by_avatar"];
-    
-    
-    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:theUrl]];
-    
-    cell.imageView.image=[UIImage imageWithData:imageData];
-    
-     NSString* titleText=[ab valueForKey:@"title"];
-    cell.textLabel.text = titleText;
-    
-     NSString* userName=[ab valueForKey:@"create_by_username"];
-    cell.detailTextLabel.text=userName;
-    cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
+        NSDictionary* ab=[groupCounts objectAtIndex:indexPath.row];
+        
+        NSString* theUrl=[ab valueForKey:@"create_by_avatar"];
+        
+        
+        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:theUrl]];
+        
+        cell.imgView.image=[UIImage imageWithData:imageData];
+        
+        NSString* titleText=[ab valueForKey:@"title"];
+        cell.title.text = titleText;
+        
+        NSString* userName=[ab valueForKey:@"create_by_username"];
+        cell.titleDetail.text=userName;
+        cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
+   
+   
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    return 80;
-    
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -137,10 +153,9 @@
     
     if ([[segue identifier] isEqualToString:@"showDetails"])
     {
-        GroupDetailsTwo *vc = [segue destinationViewController];
+       // GroupDetailsTwo *vc = [segue destinationViewController];
+        //[vc setIsHidden:@"No"];
         
-        
-        //        [vc setLongitude:[NSNumber numberWithDouble:longitude]];
     }
 }
 
