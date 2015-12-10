@@ -27,6 +27,7 @@
 		38DAB4F11C09CD9D0033920F /* homeSearchTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DAB4F01C09CD9D0033920F /* homeSearchTwo.m */; };
 		38DBEF8B1C08776F004F5300 /* TableViewCellOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DBEF891C08776F004F5300 /* TableViewCellOne.swift */; };
 		38DBEF8C1C08776F004F5300 /* TableViewCellOne.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38DBEF8A1C08776F004F5300 /* TableViewCellOne.xib */; };
+		38DD2DE11C198DB30038B503 /* NotificationPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DD2DE01C198DB30038B503 /* NotificationPage.m */; };
 		38E13A661C18082900F4154A /* aaa.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E13A651C18082900F4154A /* aaa.png */; };
 		38E13A681C181DD900F4154A /* cellDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38E13A671C181DD900F4154A /* cellDetail.xib */; };
 		38E13A6B1C181E1500F4154A /* cellDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E13A6A1C181E1500F4154A /* cellDetail.m */; };
@@ -38,8 +39,6 @@
 		38E25BD91C104C6D009EE983 /* TRStringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E25BD21C104C6D009EE983 /* TRStringExtensions.m */; };
 		38E25BDA1C104C6D009EE983 /* TRTextFieldExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E25BD41C104C6D009EE983 /* TRTextFieldExtensions.m */; };
 		38E4240C1C16BCA600ACEF47 /* GroupListTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E4240B1C16BCA600ACEF47 /* GroupListTwo.m */; };
-		38E424121C16BDA700ACEF47 /* groupDetailstable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E4240E1C16BDA700ACEF47 /* groupDetailstable.swift */; };
-		38E424131C16BDA700ACEF47 /* sampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E4240F1C16BDA700ACEF47 /* sampleData.swift */; };
 		38E424141C16BDA700ACEF47 /* welcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E424101C16BDA700ACEF47 /* welcomeScreen.swift */; };
 		38E795F71C0C1B7B00471591 /* userRegistrationThree.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E795F61C0C1B7B00471591 /* userRegistrationThree.m */; };
 		38E796391C0C45DD00471591 /* CreateGroupTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E796381C0C45DD00471591 /* CreateGroupTwo.m */; };
@@ -101,6 +100,8 @@
 		38DAB4F01C09CD9D0033920F /* homeSearchTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = homeSearchTwo.m; sourceTree = "<group>"; };
 		38DBEF891C08776F004F5300 /* TableViewCellOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellOne.swift; sourceTree = "<group>"; };
 		38DBEF8A1C08776F004F5300 /* TableViewCellOne.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCellOne.xib; sourceTree = "<group>"; };
+		38DD2DDF1C198DB30038B503 /* NotificationPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationPage.h; sourceTree = "<group>"; };
+		38DD2DE01C198DB30038B503 /* NotificationPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationPage.m; sourceTree = "<group>"; };
 		38E13A651C18082900F4154A /* aaa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aaa.png; sourceTree = "<group>"; };
 		38E13A671C181DD900F4154A /* cellDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = cellDetail.xib; path = ../cellDetail.xib; sourceTree = "<group>"; };
 		38E13A691C181E1500F4154A /* cellDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cellDetail.h; path = ../cellDetail.h; sourceTree = "<group>"; };
@@ -123,8 +124,6 @@
 		38E25BD41C104C6D009EE983 /* TRTextFieldExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRTextFieldExtensions.m; sourceTree = "<group>"; };
 		38E4240A1C16BCA600ACEF47 /* GroupListTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupListTwo.h; sourceTree = "<group>"; };
 		38E4240B1C16BCA600ACEF47 /* GroupListTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupListTwo.m; sourceTree = "<group>"; };
-		38E4240E1C16BDA700ACEF47 /* groupDetailstable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = groupDetailstable.swift; sourceTree = "<group>"; };
-		38E4240F1C16BDA700ACEF47 /* sampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sampleData.swift; sourceTree = "<group>"; };
 		38E424101C16BDA700ACEF47 /* welcomeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = welcomeScreen.swift; sourceTree = "<group>"; };
 		38E795F51C0C1B7B00471591 /* userRegistrationThree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = userRegistrationThree.h; path = ../userRegistrationThree.h; sourceTree = "<group>"; };
 		38E795F61C0C1B7B00471591 /* userRegistrationThree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = userRegistrationThree.m; path = ../userRegistrationThree.m; sourceTree = "<group>"; };
@@ -277,8 +276,6 @@
 				18D2011A1BFF4F430079FA8C /* mainChatList.swift */,
 				18D2011C1BFF4FB50079FA8C /* userSettings.swift */,
 				18D2011E1BFF4FF90079FA8C /* profileSettings.swift */,
-				38E4240E1C16BDA700ACEF47 /* groupDetailstable.swift */,
-				38E4240F1C16BDA700ACEF47 /* sampleData.swift */,
 				38E424101C16BDA700ACEF47 /* welcomeScreen.swift */,
 				18D2012B1BFF89FE0079FA8C /* groupsSampleData.swift */,
 				18F8363D1C04D05D00D4FF42 /* tabelViewTest.swift */,
@@ -296,6 +293,8 @@
 				38E1ABC71C1599D900C5E955 /* GroupDetailsTwo.m */,
 				38E4240A1C16BCA600ACEF47 /* GroupListTwo.h */,
 				38E4240B1C16BCA600ACEF47 /* GroupListTwo.m */,
+				38DD2DDF1C198DB30038B503 /* NotificationPage.h */,
+				38DD2DE01C198DB30038B503 /* NotificationPage.m */,
 			);
 			path = "travel app new";
 			sourceTree = "<group>";
@@ -524,14 +523,13 @@
 				38E25BD71C104C6D009EE983 /* TRGoogleMapsAutocompletionCellFactory.m in Sources */,
 				38E796391C0C45DD00471591 /* CreateGroupTwo.m in Sources */,
 				38E13A6B1C181E1500F4154A /* cellDetail.m in Sources */,
-				38E424121C16BDA700ACEF47 /* groupDetailstable.swift in Sources */,
 				18F8363E1C04D05D00D4FF42 /* tabelViewTest.swift in Sources */,
 				18D2011B1BFF4F430079FA8C /* mainChatList.swift in Sources */,
-				38E424131C16BDA700ACEF47 /* sampleData.swift in Sources */,
 				38D9C4F61C0EBBE30012AAAC /* SACalendar.m in Sources */,
 				38DAB4EE1C0992D20033920F /* userRegistrationTwo.m in Sources */,
 				18D2011F1BFF4FF90079FA8C /* profileSettings.swift in Sources */,
 				38D9C4F71C0EBBE30012AAAC /* SACalendarCell.m in Sources */,
+				38DD2DE11C198DB30038B503 /* NotificationPage.m in Sources */,
 				38E25BD51C104C6D009EE983 /* TRAutocompleteView.m in Sources */,
 				38E25BD91C104C6D009EE983 /* TRStringExtensions.m in Sources */,
 				1805A9101C063F08001867BA /* heyManTableViewController.swift in Sources */,

@@ -27,7 +27,7 @@
 -(void)viewDidLoad{
     self.navigationItem.hidesBackButton=NO;
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    
+    dictiorneries=[[NSMutableArray alloc]init];
     double a=-32.8683;
     double b=151.2086;
     [btnJoin setHidden:YES];
@@ -150,7 +150,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60;
+    return 76;
 }
 
 
@@ -178,16 +178,34 @@
     
     
     
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseData options:nil error:&e];
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&e];
     
-    
+    [dictiorneries addObject:dict];
     NSDictionary* meta=[dict objectForKey:@"meta"];
     
     NSString* code=(NSString*)[[meta objectForKey:@"status"]stringValue];
+   int p=1;
+    if ([dictiorneries count]==2) {
+        if ([code isEqualToString: @"200"]) {
+            [btnCancelRequest setHidden:NO];
+                      [btnJoin setHidden:YES];
+                        [lblRequestPending setHidden:NO];
+            p=2;
+        }
+    }
     
     
+    if ([dictiorneries count]==3) {
+        if ([code isEqualToString: @"200"]) {
+            [btnCancelRequest setHidden:YES];
+            [btnJoin setHidden:NO];
+            [lblRequestPending setHidden:YES];
+            p=3;
+        }
+    }
     
-    if ([code isEqualToString: @"100"]) {
+
+    if ([code isEqualToString: @"100"]&&[dictiorneries count]==1) {
         
         UIAlertController * alert=   [UIAlertController
                                       alertControllerWithTitle:@"Validation Error"
@@ -212,8 +230,13 @@
     }
     
     
-    if([code isEqualToString: @"200"]){
+    if([code isEqualToString: @"200"]&&[dictiorneries count]==1){
+
+        
         NSDictionary *dict2=(NSDictionary*)[dict objectForKey:@"response"];
+        
+
+        
         
         NSString* travelDate=(NSString*)[dict2 objectForKey:@"travel_date"];
         
@@ -287,6 +310,102 @@
         
                 NSLog(@"success");
     }
+    
+    if (p==3) {
+        [dictiorneries removeObjectAtIndex:1];
+        [dictiorneries removeObjectAtIndex:1];
+    }
 }
+
+- (IBAction)joinGroup:(id)sender {
+    NSString* sessionId;
+    
+    sessionId = [[NSUserDefaults standardUserDefaults] objectForKey:@"session_id"];
+    NSString* groupId;
+    
+    groupId = [[NSUserDefaults standardUserDefaults] objectForKey:@"group_id"];
+    
+    
+    
+//    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//    activityIndicator.alpha = 1.0;
+//    [self.view addSubview:activityIndicator];
+//    activityIndicator.center = CGPointMake([[UIScreen mainScreen]bounds].size.width/2, [[UIScreen mainScreen]bounds].size.height/2);
+//    [activityIndicator startAnimating];//to start animating
+
+    
+    
+    NSString *post = [NSString stringWithFormat:@"session_id=%@&group_id=%@",sessionId,groupId];
+    
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+    
+    NSMutableURLRequest *requestT = [[NSMutableURLRequest alloc] init] ;
+    
+    [requestT setURL:[NSURL URLWithString:@"http://travelapp.cityu.me/travelgroups/join_to_group/"]];
+    
+    [requestT setHTTPMethod:@"POST"];
+    
+    [requestT setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
+    [requestT setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    [requestT setHTTPBody:postData];
+    
+    [self.view endEditing:YES];
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:requestT delegate:self];
+    
+    if(conn) {
+        NSLog(@"Connection Successful");
+        
+    } else {
+        NSLog(@"Connection could not be made");
+        
+        
+    }
+    
+}
+- (IBAction)cancelRequest:(id)sender {
+    NSString* sessionId;
+    
+    sessionId = [[NSUserDefaults standardUserDefaults] objectForKey:@"session_id"];
+    NSString* groupId;
+    
+    groupId = [[NSUserDefaults standardUserDefaults] objectForKey:@"group_id"];
+    
+     NSString *post = [NSString stringWithFormat:@"session_id=%@&group_id=%@",sessionId,groupId];
+    
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+    
+    NSMutableURLRequest *requestT = [[NSMutableURLRequest alloc] init] ;
+    
+    [requestT setURL:[NSURL URLWithString:@"http://travelapp.cityu.me/travelgroups/cancelRequest/"]];
+    
+    [requestT setHTTPMethod:@"POST"];
+    
+    [requestT setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
+    [requestT setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    [requestT setHTTPBody:postData];
+    
+    [self.view endEditing:YES];
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:requestT delegate:self];
+    
+    if(conn) {
+        NSLog(@"Connection Successful");
+        
+    } else {
+        NSLog(@"Connection could not be made");
+        
+        
+    }
+}
+
+
+
 
 @end

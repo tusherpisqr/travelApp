@@ -13,6 +13,7 @@
     GMSMapView* mapView;
     NSMutableArray *recipes;
     NSMutableArray *searchResults;
+    NSMutableArray* dictiorneries;
     GMSCameraPosition* camera;
     GMSPlacesClient* client;
     NSMutableData* responseData;
@@ -20,7 +21,7 @@
     BOOL isAdmin;
     int group_status;
     NSString* group_avatar;
-    
+    UIActivityIndicatorView* activityIndicator;
     IBOutlet UITableView *tableView;
 }
 

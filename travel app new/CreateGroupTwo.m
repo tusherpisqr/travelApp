@@ -14,6 +14,15 @@
 
 @synthesize txtDate,txtGroupName,txtMemberNumber,tableView,addRow;
 
+-(void)viewWillAppear:(BOOL)animated{
+     recipes = [[NSMutableArray alloc]init];
+    [self.tableView reloadData];
+    newView=nil;
+    txtGroupName.text=@"";
+    txtDate.text=@"";
+    txtMemberNumber.text=@"";
+}
+
 -(void)viewDidLoad{
     [self.navigationItem setHidesBackButton:YES animated:YES];
     num=0;
@@ -125,21 +134,36 @@
        
     return NO;
 }
+
+-(void)aMethod{
+    [newView removeFromSuperview];
+    newView=nil;
+}
 -(void)add{
     
     newView = [[UIView alloc] initWithFrame:self.view.bounds];
     newView.center=self.view.center;
     newView.backgroundColor=[UIColor whiteColor];
-    CGRect frame=CGRectMake(100, 100, newView.frame.size.width, 50);
+    CGRect frame=CGRectMake(100, 100, newView.frame.size.width-50, 50);
     _textFie=[[UITextField alloc]initWithFrame:frame];
     _textFie = [[UITextField alloc]initWithFrame:CGRectMake(0, 67
-                                                            , newView.frame.size.width, 50)];
+                                                            , newView.frame.size.width-50, 50)];
     _textFie.borderStyle = UITextBorderStyleRoundedRect;
     _textFie.backgroundColor = [UIColor whiteColor];
     _textFie.placeholder=@"Search cities";
     [_textFie becomeFirstResponder];
     [newView addSubview:_textFie];
     
+    _ButtonF=[[UIButton alloc]initWithFrame:CGRectMake(newView.frame.size.width-50, 67, 50, 50)];
+    [_ButtonF setTitle:@"Close" forState:UIControlStateNormal];
+    [_ButtonF setBackgroundColor:[UIColor whiteColor]];
+    [_ButtonF setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_ButtonF addTarget:self
+               action:@selector(aMethod)
+     forControlEvents:UIControlEventTouchUpInside];
+    
+    [newView addSubview:_ButtonF];
+
     _autocompleteView = [TRAutocompleteView autocompleteViewBindedTo:_textFie
                                                          usingSource:[[TRGoogleMapsAutocompleteItemsSource alloc] initWithMinimumCharactersToTrigger:2 apiKey:@"AIzaSyBbzjhDtPMh6z0h1LqqijxifTEsEXMbaTw"]
                                                          cellFactory:[[TRGoogleMapsAutocompletionCellFactory alloc] initWithCellForegroundColor:[UIColor lightGrayColor] fontSize:14]
@@ -182,6 +206,7 @@
     NSMutableArray *zoom=[[NSMutableArray alloc]init];
     NSMutableArray *places=[[NSMutableArray alloc]init];
     NSMutableArray *country_name=[[NSMutableArray alloc]init];
+     NSMutableArray *country_name_codes=[[NSMutableArray alloc]init];
     
     NSString* group_name=txtGroupName.text;
     
@@ -214,7 +239,9 @@
             NSRange ab=[name rangeOfString:@"," options:NSBackwardsSearch];
             int abc=ab.location;
             
-            country=[country substringFromIndex:abc+2];
+            country=[country substringFromIndex:abc+1];
+            
+            country = [country stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             [country_name addObject:country];
             [places addObject:name];
             [order_by addObject:[NSNumber numberWithInt:orderby]];
@@ -224,9 +251,28 @@
             orderby++;
         }
         
+        NSArray *countryCodes = [NSLocale ISOCountryCodes];
+        NSMutableArray *countries = [NSMutableArray arrayWithCapacity:[countryCodes count]];
+        
+        for (NSString *countryCode in countryCodes)
+        {
+            NSString *identifier = [NSLocale localeIdentifierFromComponents: [NSDictionary dictionaryWithObject: countryCode forKey: NSLocaleCountryCode]];
+            NSString *country = [[[NSLocale alloc] initWithLocaleIdentifier:@"en_UK"] displayNameForKey: NSLocaleIdentifier value: identifier];
+            [countries addObject: country];
+        }
+        
+        NSDictionary *codeForCountryDictionary = [[NSDictionary alloc] initWithObjects:countryCodes forKeys:countries];
+        
+        
+
+        for (NSString* name in country_name) {
+            NSString* code=[NSString stringWithFormat:@"%@",[codeForCountryDictionary objectForKey:name]];
+            
+            [country_name_codes addObject:code];
+        }
         int i=0;
         for (NSString* order in order_by) {
-            NSString *kposttwo = [NSString stringWithFormat:@"&place_id[%d]=%@&country[%d]=%@&location_name[%d]=%@&order_by[%d]=%@&longitude[%d]=%@&latitude[%d]=%@&zoom[%d]=%@",i,@"abc",i,country_name[i],i,places[i],i,order_by[i],i,lats[i],i,longs[i],i,zoom[i]];
+            NSString *kposttwo = [NSString stringWithFormat:@"&place_id[%d]=%@&country[%d]=%@&location_name[%d]=%@&order_by[%d]=%@&longitude[%d]=%@&latitude[%d]=%@&zoom[%d]=%@",i,@"abc",i,country_name_codes[i],i,places[i],i,order_by[i],i,lats[i],i,longs[i],i,zoom[i]];
             
             [post appendString:kposttwo];
             i++;
