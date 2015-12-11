@@ -7,12 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SWTableViewCell.h"
 
-@interface NotificationPage : UIViewController<UITableViewDataSource,UITableViewDelegate>{
+@interface NotificationPage : UIViewController<UITableViewDataSource,UITableViewDelegate,SWTableViewCellDelegate>{
     NSMutableArray* notificationCounts;
     NSMutableArray* groupCounts;
+    NSMutableData* responseData;
+    long selectedID;
+    long selectedNotificationID;
+    NSMutableArray* dicts;
+    long second;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableViewNotifications;
 @property (strong, nonatomic) IBOutlet UITableView *tableViewGroups;
+
+
 
 @end

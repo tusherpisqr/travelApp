@@ -21,13 +21,16 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - GoogleMaps (1.10.5)
+  - SWTableViewCell (0.3.7)
 
 DEPENDENCIES:
   - AFNetworking
   - GoogleMaps
+  - SWTableViewCell (~> 0.3.7)
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   GoogleMaps: da51c62c338c2d9c47cdad470a0d1e0e4b8544e4
+  SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
 
 COCOAPODS: 0.39.0

@@ -19,6 +19,9 @@
 		18D2012A1BFF59FD0079FA8C /* group_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D201291BFF59FD0079FA8C /* group_more.png */; };
 		18D2012C1BFF89FE0079FA8C /* groupsSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2012B1BFF89FE0079FA8C /* groupsSampleData.swift */; };
 		18F8363E1C04D05D00D4FF42 /* tabelViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8363D1C04D05D00D4FF42 /* tabelViewTest.swift */; };
+		38D38B5E1C1AA8D20044480F /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D38B5D1C1AA8D20044480F /* CustomTableViewCell.m */; };
+		38D38B601C1AAA5F0044480F /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38D38B5F1C1AAA5F0044480F /* CustomTableViewCell.xib */; };
+		38D38B661C1AF67A0044480F /* Logout.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D38B651C1AF67A0044480F /* Logout.m */; };
 		38D9C4F41C0EBBE30012AAAC /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D9C4EC1C0EBBE30012AAAC /* DateUtil.m */; };
 		38D9C4F51C0EBBE30012AAAC /* DMLazyScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D9C4EE1C0EBBE30012AAAC /* DMLazyScrollView.m */; };
 		38D9C4F61C0EBBE30012AAAC /* SACalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D9C4F01C0EBBE30012AAAC /* SACalendar.m */; };
@@ -84,6 +87,11 @@
 		18D2012B1BFF89FE0079FA8C /* groupsSampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = groupsSampleData.swift; sourceTree = "<group>"; };
 		18F8363D1C04D05D00D4FF42 /* tabelViewTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tabelViewTest.swift; sourceTree = "<group>"; };
 		2C6E26D66F9D9FE04A082060 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		38D38B5C1C1AA8D20044480F /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
+		38D38B5D1C1AA8D20044480F /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
+		38D38B5F1C1AAA5F0044480F /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
+		38D38B641C1AF67A0044480F /* Logout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Logout.h; path = ../Logout.h; sourceTree = "<group>"; };
+		38D38B651C1AF67A0044480F /* Logout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Logout.m; path = ../Logout.m; sourceTree = "<group>"; };
 		38D9C4EB1C0EBBE30012AAAC /* DateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateUtil.h; sourceTree = "<group>"; };
 		38D9C4EC1C0EBBE30012AAAC /* DateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateUtil.m; sourceTree = "<group>"; };
 		38D9C4ED1C0EBBE30012AAAC /* DMLazyScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMLazyScrollView.h; sourceTree = "<group>"; };
@@ -265,6 +273,8 @@
 				18D201281BFF57AD0079FA8C /* images */,
 				80EEB8601BFF22D90029CD94 /* AppDelegate.swift */,
 				80EEB8621BFF22D90029CD94 /* ViewController.swift */,
+				38D38B641C1AF67A0044480F /* Logout.h */,
+				38D38B651C1AF67A0044480F /* Logout.m */,
 				38DAB4EC1C0992D20033920F /* userRegistrationTwo.h */,
 				38DAB4ED1C0992D20033920F /* userRegistrationTwo.m */,
 				38E795F51C0C1B7B00471591 /* userRegistrationThree.h */,
@@ -295,6 +305,9 @@
 				38E4240B1C16BCA600ACEF47 /* GroupListTwo.m */,
 				38DD2DDF1C198DB30038B503 /* NotificationPage.h */,
 				38DD2DE01C198DB30038B503 /* NotificationPage.m */,
+				38D38B5C1C1AA8D20044480F /* CustomTableViewCell.h */,
+				38D38B5D1C1AA8D20044480F /* CustomTableViewCell.m */,
+				38D38B5F1C1AAA5F0044480F /* CustomTableViewCell.xib */,
 			);
 			path = "travel app new";
 			sourceTree = "<group>";
@@ -437,6 +450,7 @@
 			files = (
 				18D2012A1BFF59FD0079FA8C /* group_more.png in Resources */,
 				18D201251BFF56E70079FA8C /* placeholder_profile_pic.png in Resources */,
+				38D38B601C1AAA5F0044480F /* CustomTableViewCell.xib in Resources */,
 				80EEB88F1BFF2D020029CD94 /* logo-tours.png in Resources */,
 				38DBEF8C1C08776F004F5300 /* TableViewCellOne.xib in Resources */,
 				80EEB86B1BFF22D90029CD94 /* LaunchScreen.storyboard in Resources */,
@@ -527,6 +541,7 @@
 				18D2011B1BFF4F430079FA8C /* mainChatList.swift in Sources */,
 				38D9C4F61C0EBBE30012AAAC /* SACalendar.m in Sources */,
 				38DAB4EE1C0992D20033920F /* userRegistrationTwo.m in Sources */,
+				38D38B5E1C1AA8D20044480F /* CustomTableViewCell.m in Sources */,
 				18D2011F1BFF4FF90079FA8C /* profileSettings.swift in Sources */,
 				38D9C4F71C0EBBE30012AAAC /* SACalendarCell.m in Sources */,
 				38DD2DE11C198DB30038B503 /* NotificationPage.m in Sources */,
@@ -546,6 +561,7 @@
 				38E1ABC81C1599D900C5E955 /* GroupDetailsTwo.m in Sources */,
 				18D201151BFF4D860079FA8C /* groupChat.swift in Sources */,
 				38E25BDA1C104C6D009EE983 /* TRTextFieldExtensions.m in Sources */,
+				38D38B661C1AF67A0044480F /* Logout.m in Sources */,
 				38DAB4F11C09CD9D0033920F /* homeSearchTwo.m in Sources */,
 				80EEB8611BFF22D90029CD94 /* AppDelegate.swift in Sources */,
 			);
