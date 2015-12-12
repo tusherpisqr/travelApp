@@ -16,6 +16,7 @@
     long selectedID;
        NSMutableArray* dicts;
     long second;
+    BOOL ab;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableViewNotifications;
 @property (strong, nonatomic) IBOutlet UITableView *tableViewGroups;

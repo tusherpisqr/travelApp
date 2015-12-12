@@ -19,7 +19,11 @@
     NSString* userName;
     
     userName = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString* email;
+    
+    email = [[NSUserDefaults standardUserDefaults] objectForKey:@"email"];
     _lblUserName.text=userName;
+    _lblEmail.text=email;
     // Do any additional setup after loading the view.
 }
 

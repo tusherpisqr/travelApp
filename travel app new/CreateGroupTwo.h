@@ -32,6 +32,7 @@
 }
 
 @property ( nonatomic)  UITextField *textFie;
+@property (strong, nonatomic) IBOutlet UIButton *btnSave;
 @property ( nonatomic)  UIButton *ButtonF;
 @property (weak, nonatomic) IBOutlet UITextField *txtGroupName;
 @property (weak, nonatomic) IBOutlet UITextField *txtMemberNumber;

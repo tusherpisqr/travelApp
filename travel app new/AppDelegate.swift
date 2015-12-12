@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().backgroundColor = UIColor.whiteColor()
                UINavigationBar.appearance().backItem?.title = nil
         GMSServices.provideAPIKey("AIzaSyCMpXEwpmeAkhLqXdSZ0vHJe0EtVXocgWw");
+         
         return true
     }
 

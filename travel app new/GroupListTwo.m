@@ -109,7 +109,13 @@
         
         NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:theUrl]];
         
+    if ([theUrl isEqualToString:@""]) {
+        cell.imgView.image=[UIImage imageNamed:@"logo-tours.png"];
+    }
+    else{
         cell.imgView.image=[UIImage imageWithData:imageData];
+    }
+   
         
         NSString* titleText=[ab valueForKey:@"title"];
         cell.title.text = titleText;

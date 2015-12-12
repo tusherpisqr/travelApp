@@ -12,5 +12,6 @@
     BOOL ab;
 }
 @property (strong, nonatomic) IBOutlet UILabel *lblUserName;
+@property (strong, nonatomic) IBOutlet UILabel *lblEmail;
 
 @end

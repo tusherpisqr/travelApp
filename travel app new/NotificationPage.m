@@ -26,6 +26,7 @@
     
     tableViewNotifications.separatorStyle=UITableViewCellSeparatorStyleNone;
     tableViewGroups.separatorStyle=UITableViewCellSeparatorStyleNone;
+    ab=NO;
      
 }
 
@@ -162,7 +163,19 @@
             cell.delegate = self;
         }
         cell.textLabel.text=message;
+        NSDictionary* ab=[groupCounts objectAtIndex:indexPath.row];
         
+        NSString* theUrl=icon;
+        
+        
+        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:theUrl]];
+        
+        if ([theUrl isEqualToString:@""]) {
+            cell.imageView.image=[UIImage imageNamed:@"logo-tours.png"];
+        }
+        else{
+            cell.imageView.image=[UIImage imageWithData:imageData];
+        }
         
 
     }
@@ -185,6 +198,18 @@
         long msg_id=[[a valueForKey:@"msgid"]longLongValue];
         
         NSString* message=[a valueForKey:@"msg"];
+        
+        NSString* theUrl=avater;
+        
+        
+        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:theUrl]];
+        
+        if ([theUrl isEqualToString:@""]) {
+            cell.imageView.image=[UIImage imageNamed:@"logo-tours.png"];
+        }
+        else{
+            cell.imageView.image=[UIImage imageWithData:imageData];
+        }
 
       cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.text=message;
@@ -195,6 +220,16 @@
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state{
     
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    if ([[segue identifier] isEqualToString:@"chatGroups"])
+    {
+        
+        
+    }
 }
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
@@ -314,9 +349,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (tableView.tag==0) {
-        
+    if (tableView.tag==1) {
+       // ab=YES;
+        // [self performSegueWithIdentifier:@"chatGroups" sender:self];
     }
+    
+}
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    
+    if (ab==NO) {
+        return NO;
+    }
+    else return YES;
+    
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {

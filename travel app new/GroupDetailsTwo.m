@@ -124,10 +124,18 @@
     NSString* theUrl=group_avatar;
     
     
-    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:theUrl]];
-    
-    cell.imgView.image=[UIImage imageWithData:imageData];
+    if ([theUrl isEqualToString:@""]) {
+        cell.imgView.image=[UIImage imageNamed:@"logo-tours.png"];
+    }
+    else{
+        
+        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:theUrl]];
+        
+        cell.imgView.image=[UIImage imageWithData:imageData];
+        
 
+    }
+    
     
     NSDictionary* ab=[members objectAtIndex:indexPath.row];
     
@@ -307,7 +315,7 @@
 //        GMSPolyline *rectangle = [GMSPolyline polylineWithPath:path];
 //        rectangle.strokeWidth = 2.f;
 //        rectangle.map = mapView;
-        
+//        
         
         
                 NSLog(@"success");

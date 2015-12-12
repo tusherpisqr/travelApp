@@ -22,6 +22,9 @@
 		38D38B5E1C1AA8D20044480F /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D38B5D1C1AA8D20044480F /* CustomTableViewCell.m */; };
 		38D38B601C1AAA5F0044480F /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38D38B5F1C1AAA5F0044480F /* CustomTableViewCell.xib */; };
 		38D38B661C1AF67A0044480F /* Logout.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D38B651C1AF67A0044480F /* Logout.m */; };
+		38D5CFFA1C1C4E01000390D5 /* ic_notifications_48pt.png in Resources */ = {isa = PBXBuildFile; fileRef = 38D5CFF91C1C4E01000390D5 /* ic_notifications_48pt.png */; };
+		38D5CFFC1C1C4E08000390D5 /* ic_update_48pt.png in Resources */ = {isa = PBXBuildFile; fileRef = 38D5CFFB1C1C4E08000390D5 /* ic_update_48pt.png */; };
+		38D5CFFE1C1C4E34000390D5 /* ic_keyboard_capslock_48pt.png in Resources */ = {isa = PBXBuildFile; fileRef = 38D5CFFD1C1C4E34000390D5 /* ic_keyboard_capslock_48pt.png */; };
 		38D9C4F41C0EBBE30012AAAC /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D9C4EC1C0EBBE30012AAAC /* DateUtil.m */; };
 		38D9C4F51C0EBBE30012AAAC /* DMLazyScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D9C4EE1C0EBBE30012AAAC /* DMLazyScrollView.m */; };
 		38D9C4F61C0EBBE30012AAAC /* SACalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D9C4F01C0EBBE30012AAAC /* SACalendar.m */; };
@@ -92,6 +95,9 @@
 		38D38B5F1C1AAA5F0044480F /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
 		38D38B641C1AF67A0044480F /* Logout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Logout.h; path = ../Logout.h; sourceTree = "<group>"; };
 		38D38B651C1AF67A0044480F /* Logout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Logout.m; path = ../Logout.m; sourceTree = "<group>"; };
+		38D5CFF91C1C4E01000390D5 /* ic_notifications_48pt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_notifications_48pt.png; sourceTree = "<group>"; };
+		38D5CFFB1C1C4E08000390D5 /* ic_update_48pt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_update_48pt.png; sourceTree = "<group>"; };
+		38D5CFFD1C1C4E34000390D5 /* ic_keyboard_capslock_48pt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_keyboard_capslock_48pt.png; sourceTree = "<group>"; };
 		38D9C4EB1C0EBBE30012AAAC /* DateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateUtil.h; sourceTree = "<group>"; };
 		38D9C4EC1C0EBBE30012AAAC /* DateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateUtil.m; sourceTree = "<group>"; };
 		38D9C4ED1C0EBBE30012AAAC /* DMLazyScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMLazyScrollView.h; sourceTree = "<group>"; };
@@ -184,6 +190,9 @@
 		18D201281BFF57AD0079FA8C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				38D5CFFD1C1C4E34000390D5 /* ic_keyboard_capslock_48pt.png */,
+				38D5CFFB1C1C4E08000390D5 /* ic_update_48pt.png */,
+				38D5CFF91C1C4E01000390D5 /* ic_notifications_48pt.png */,
 				38E13A651C18082900F4154A /* aaa.png */,
 				18D201291BFF59FD0079FA8C /* group_more.png */,
 				18D201221BFF56E70079FA8C /* placeholder_profile_pic.png */,
@@ -448,7 +457,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38D5CFFC1C1C4E08000390D5 /* ic_update_48pt.png in Resources */,
 				18D2012A1BFF59FD0079FA8C /* group_more.png in Resources */,
+				38D5CFFA1C1C4E01000390D5 /* ic_notifications_48pt.png in Resources */,
 				18D201251BFF56E70079FA8C /* placeholder_profile_pic.png in Resources */,
 				38D38B601C1AAA5F0044480F /* CustomTableViewCell.xib in Resources */,
 				80EEB88F1BFF2D020029CD94 /* logo-tours.png in Resources */,
@@ -460,6 +471,7 @@
 				38E13A661C18082900F4154A /* aaa.png in Resources */,
 				80EEB8681BFF22D90029CD94 /* Assets.xcassets in Resources */,
 				80EEB8661BFF22D90029CD94 /* Main.storyboard in Resources */,
+				38D5CFFE1C1C4E34000390D5 /* ic_keyboard_capslock_48pt.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

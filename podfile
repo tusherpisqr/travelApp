@@ -3,4 +3,7 @@ platform :ios, '8.1'
 pod 'GoogleMaps'
 pod 'AFNetworking'
 pod 'SWTableViewCell', '~> 0.3.7'
+pod 'FBSDKCoreKit'
+pod 'FBSDKLoginKit'
+pod 'FBSDKShareKit'
 

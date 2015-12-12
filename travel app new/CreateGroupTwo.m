@@ -12,7 +12,7 @@
 
 @implementation CreateGroupTwo
 
-@synthesize txtDate,txtGroupName,txtMemberNumber,tableView,addRow;
+@synthesize txtDate,txtGroupName,txtMemberNumber,tableView,addRow,btnSave;
 
 -(void)viewWillAppear:(BOOL)animated{
      recipes = [[NSMutableArray alloc]init];
@@ -35,6 +35,9 @@
     txtGroupName.delegate=self;
     txtDate.delegate=self;
     _textFie.delegate=self;
+    btnSave.layer.cornerRadius=2.0f;
+    addRow.layer.cornerRadius=2.0f;
+    
 
 }
 
