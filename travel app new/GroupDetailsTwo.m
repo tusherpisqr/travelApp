@@ -11,7 +11,7 @@
 
 @implementation GroupDetailsTwo
 
-@synthesize gmapView,btnJoin,isHidden,lblMapStartDate,btnCancelRequest,lblRequestPending,lblChatNumber,lblShareNumber;
+@synthesize gmapView,btnJoin,lblMapStartDate,btnCancelRequest,lblRequestPending,lblChatNumber,lblShareNumber;
 
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
@@ -44,13 +44,7 @@
    
     
     [gmapView addSubview:mapView];
-       if ([isHidden isEqualToString:@"Yes"]) {
-        [
-         btnJoin setHidden:YES];    }
-    if ([isHidden isEqualToString:@"No"]) {
-        [
-         btnJoin setHidden:NO];
-    }
+      
     
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone; // or you have
     NSString* sessionId;
@@ -279,8 +273,16 @@
         if (isAdmin==NO) {
             if (group_status==0) {
                 [btnJoin setHidden:NO];
+                [btnCancelRequest setHidden:YES];
+                [lblRequestPending setHidden:YES];
             }
             if (group_status==2) {
+                [btnJoin setHidden:YES];
+                [btnCancelRequest setHidden:YES];
+                [lblRequestPending setHidden:YES];
+            }
+            if (group_status==3) {
+                [btnJoin setHidden:YES];
                 [btnCancelRequest setHidden:NO];
                 [lblRequestPending setHidden:NO];
             }
@@ -326,15 +328,6 @@
     groupId = [[NSUserDefaults standardUserDefaults] objectForKey:@"group_id"];
     
     
-    
-//    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//    activityIndicator.alpha = 1.0;
-//    [self.view addSubview:activityIndicator];
-//    activityIndicator.center = CGPointMake([[UIScreen mainScreen]bounds].size.width/2, [[UIScreen mainScreen]bounds].size.height/2);
-//    [activityIndicator startAnimating];//to start animating
-
-    
-    
     NSString *post = [NSString stringWithFormat:@"session_id=%@&group_id=%@",sessionId,groupId];
     
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
@@ -361,8 +354,6 @@
         
     } else {
         NSLog(@"Connection could not be made");
-        
-        
     }
     
 }
@@ -400,12 +391,6 @@
         
     } else {
         NSLog(@"Connection could not be made");
-        
-        
-    }
+   }
 }
-
-
-
-
 @end

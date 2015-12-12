@@ -132,10 +132,9 @@
         
         // Add utility buttons
         NSMutableArray *leftUtilityButtons = [NSMutableArray new];
-        NSNumber* iD=[NSNumber numberWithInt:indexPath.row];
-        [leftUtilityButtons addObject:iD];
-         iD=[NSNumber numberWithLong:ID];
-        [leftUtilityButtons addObject:iD];
+       
+        
+        
         NSMutableArray *rightUtilityButtons = [NSMutableArray new];
          NSMutableArray *rightUtilityButtonsTwo = [NSMutableArray new];
         
@@ -156,6 +155,7 @@
         cell.leftUtilityButtons = leftUtilityButtons;
         cell.rightUtilityButtons = rightUtilityButtons;
         cell.delegate = self;
+            cell.tag=indexPath.row;
         }
         if (type==3) {
             cell.rightUtilityButtons = rightUtilityButtonsTwo;
@@ -193,64 +193,81 @@
     return cell;
 }
 
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state{
+    
+}
+
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
     switch (index) {
         case 0:
         {
-            NSArray* abc=cell.leftUtilityButtons;
             
-            
-            selectedID=[abc[0] longLongValue];
+            selectedID=cell.tag;
             NSString* sessionId;
             
             sessionId = [[NSUserDefaults standardUserDefaults] objectForKey:@"session_id"];
             
-            NSString* notification_ID=[NSString stringWithFormat:@"%@",abc[1]];
+            NSDictionary* a=[notificationCounts objectAtIndex:selectedID];
             
-             NSString* flag=@"1";
+            long ID=[[a valueForKey:@"id"]longLongValue];
+            NSString* notification_ID=[NSString stringWithFormat:@"%ld",ID];
+
             
+            long type=[[a valueForKey:@"type"]longLongValue];
+            
+            NSString* flag;
+            if (type==3) {
+                flag=@"3";
+            }
+            else{
+                flag=@"1";
+            }
             NSString *post = [NSString stringWithFormat:@"session_id=%@&notification_id=%@&flag=%@",sessionId,notification_ID,flag];
-            
             NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-            
+                
             NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
-            
+                
             NSMutableURLRequest *requestT = [[NSMutableURLRequest alloc] init] ;
-            
+                
             [requestT setURL:[NSURL URLWithString:@"http://travelapp.cityu.me/travelgroups/approvalGroupRequestByNotificationId"]];
-            
+                
             [requestT setHTTPMethod:@"POST"];
-            
+                
             [requestT setValue:postLength forHTTPHeaderField:@"Content-Length"];
-            
+                
             [requestT setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-            
+                
             [requestT setHTTPBody:postData];
-            
+                
             [self.view endEditing:YES];
             NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:requestT delegate:self];
-            
+                
             if(conn) {
                 NSLog(@"Connection Successful");
-                
+                    
             } else {
                 NSLog(@"Connection could not be made");
-                
-                
+                    
+                    
             }
+                
 
+            
             
             break;
         }
         case 1:
         {
-            [notificationCounts removeObjectAtIndex:selectedID];
-            [tableViewNotifications reloadData];
+            
+            selectedID=cell.tag;
             NSString* sessionId;
             
             sessionId = [[NSUserDefaults standardUserDefaults] objectForKey:@"session_id"];
             
-            NSString* notification_ID=[NSString stringWithFormat:@"%ld",selectedNotificationID];
+            NSDictionary* a=[notificationCounts objectAtIndex:selectedID];
+            
+            long ID=[[a valueForKey:@"id"]longLongValue];
+            NSString* notification_ID=[NSString stringWithFormat:@"%ld",ID];
             
             NSString* flag=@"2";
             
@@ -300,9 +317,6 @@
     if (tableView.tag==0) {
         
     }
-    
-    
-    
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -378,7 +392,8 @@
         NSLog(@"success");
     }
     if (second>1) {
-        [notificationCounts removeObjectAtIndex:(int)selectedID];
+        
+        [notificationCounts removeObjectAtIndex:selectedID];
         [tableViewNotifications reloadData];
 
     }

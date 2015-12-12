@@ -16,6 +16,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSString* userName;
+    
+    userName = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    _lblUserName.text=userName;
     // Do any additional setup after loading the view.
 }
 

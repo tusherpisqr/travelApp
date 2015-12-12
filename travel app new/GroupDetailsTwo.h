@@ -28,7 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIView *gmapView;
 @property (weak, nonatomic) IBOutlet UIButton *btnJoin;
 @property (strong, nonatomic) IBOutlet UILabel *lblMapStartDate;
-@property(strong) NSString* isHidden;
+
 @property (strong, nonatomic) IBOutlet UILabel *lblRequestPending;
 @property (strong, nonatomic) IBOutlet UIButton *btnCancelRequest;
 @property (strong, nonatomic) IBOutlet UILabel *lblChatNumber;

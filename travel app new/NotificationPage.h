@@ -14,8 +14,7 @@
     NSMutableArray* groupCounts;
     NSMutableData* responseData;
     long selectedID;
-    long selectedNotificationID;
-    NSMutableArray* dicts;
+       NSMutableArray* dicts;
     long second;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableViewNotifications;
