@@ -23,7 +23,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     notificationCounts=[[NSMutableArray alloc]init];
     groupCounts=[[NSMutableArray alloc]init];
-    
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     tableViewNotifications.separatorStyle=UITableViewCellSeparatorStyleNone;
     tableViewGroups.separatorStyle=UITableViewCellSeparatorStyleNone;
     ab=NO;
