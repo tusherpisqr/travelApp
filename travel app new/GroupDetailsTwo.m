@@ -14,7 +14,7 @@
 @synthesize gmapView,btnJoin,lblMapStartDate,btnCancelRequest,lblRequestPending,lblChatNumber,lblShareNumber;
 
 -(void)viewWillAppear:(BOOL)animated{
-    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style: UIBarButtonItemStyleBordered target:self action:@selector(Back)];
     self.navigationItem.leftBarButtonItem = backButton;

@@ -153,7 +153,7 @@
                                                             , newView.frame.size.width-50, 50)];
     _textFie.borderStyle = UITextBorderStyleRoundedRect;
     _textFie.backgroundColor = [UIColor whiteColor];
-    _textFie.placeholder=@"Search cities";
+    _textFie.placeholder=@"Find Your Location...";
     [_textFie becomeFirstResponder];
     [newView addSubview:_textFie];
     

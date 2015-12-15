@@ -171,6 +171,9 @@
        
         [self performSegueWithIdentifier:@"eef" sender:self];
         
+        txtPassword.text=@"";
+        txtEmail.text=@"";
+        txtUser.text=@"";
         NSLog(@"success");
     }
 }

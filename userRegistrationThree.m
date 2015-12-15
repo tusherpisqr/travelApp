@@ -215,6 +215,9 @@
         
         [self performSegueWithIdentifier:@"alreadyAccount" sender:self];
         
+        txtEmail.text=@"";
+        txtPassword.text=@"";
+        
         NSLog(@"success");
     }
 }

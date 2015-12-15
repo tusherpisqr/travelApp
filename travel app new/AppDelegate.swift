@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let color = UIColor(red: 235.0/255.0, green: 129.0/255.0, blue: 87.0/255.0, alpha: 1.0)
         
        UITabBar.appearance().barTintColor = color
+        UINavigationBar.appearance().barTintColor=color
         UITabBar.appearance().tintColor = UIColor.whiteColor()
         UITabBar.appearance().backgroundColor = UIColor.whiteColor()
                UINavigationBar.appearance().backItem?.title = nil

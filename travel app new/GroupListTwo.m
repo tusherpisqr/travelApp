@@ -13,7 +13,7 @@
 @implementation GroupListTwo
 
 -(void)viewWillAppear:(BOOL)animated{
-    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+   
 
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style: UIBarButtonItemStyleBordered target:self action:@selector(Back)];
     self.navigationItem.leftBarButtonItem = backButton;
@@ -21,12 +21,13 @@
 
 - (IBAction)Back
 {
-    [self dismissViewControllerAnimated:YES completion:nil]; // ios 6
+    [self.navigationController popViewControllerAnimated:YES]; // ios 6
 }
 
 
 -(void)viewDidLoad{
    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
     
     groupCounts= [[NSArray alloc]  init];
     
