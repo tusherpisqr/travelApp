@@ -10,6 +10,7 @@
 #import "NotificationPage.h"
 #import "cellDetail.h"
 #import "CustomTableViewCell.h"
+#import "GroupChatTwo.h"
 
 
 @interface NotificationPage ()
@@ -28,12 +29,6 @@
     tableViewNotifications.separatorStyle=UITableViewCellSeparatorStyleNone;
     tableViewGroups.separatorStyle=UITableViewCellSeparatorStyleNone;
     ab=NO;
-     
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    second=0;
     
     NSString* sessionId;
     
@@ -68,6 +63,13 @@
         
         
     }
+     
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    second=0;
+   
 
 }
 
@@ -213,7 +215,7 @@
         }
 
       cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.text=message;
+        cell.textLabel.text=title;
     }
     
     return cell;
@@ -229,7 +231,7 @@
     if ([[segue identifier] isEqualToString:@"chatGroups"])
     {
         
-        
+        second=0;
     }
 }
 
@@ -351,8 +353,22 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (tableView.tag==1) {
-       // ab=YES;
-        // [self performSegueWithIdentifier:@"chatGroups" sender:self];
+       ab=YES;
+        NSDictionary* a=[groupCounts objectAtIndex:indexPath.row];
+        
+        selectedGroupID=[[a valueForKey:@"group_id"]longLongValue];
+        
+        NSNumber* ab=[NSNumber numberWithLong:selectedGroupID];
+
+        NSUserDefaults *prefs2 = [NSUserDefaults standardUserDefaults];
+        
+        [prefs2 setObject:ab forKey:@"selectedGroupID"];
+        
+        
+        [prefs2 synchronize];
+
+
+         [self performSegueWithIdentifier:@"chatGroups" sender:self];
     }
     
 }

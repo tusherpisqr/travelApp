@@ -14,6 +14,7 @@
     NSMutableArray* groupCounts;
     NSMutableData* responseData;
     long selectedID;
+    long selectedGroupID;
        NSMutableArray* dicts;
     long second;
     BOOL ab;

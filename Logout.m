@@ -7,6 +7,7 @@
 //
 
 #import "Logout.h"
+#import "userRegistrationThree.h"
 
 @interface Logout ()
 
@@ -24,7 +25,9 @@
     email = [[NSUserDefaults standardUserDefaults] objectForKey:@"email"];
     _lblUserName.text=userName;
     _lblEmail.text=email;
-    // Do any additional setup after loading the view.
+    ab=NO;
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,28 +35,133 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 - (IBAction)abc:(id)sender {
-    NSUserDefaults *prefs2 = [NSUserDefaults standardUserDefaults];
+    NSString* sessionId;
+    NSString* device_token=@"123456";
     
-    [prefs2 setObject:@"" forKey:@"username"];
+    sessionId = [[NSUserDefaults standardUserDefaults] objectForKey:@"session_id"];
+   
+    NSString *post = [NSString stringWithFormat:@"device_token=%@&session_id=%@",device_token,sessionId];
     
-    [prefs2 setObject:@"" forKey:@"session_id"];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
-    [prefs2 setObject:@"" forKey:@"pass"];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
     
-    [prefs2 setObject:@"" forKey:@"email"];
+    NSMutableURLRequest *requestT = [[NSMutableURLRequest alloc] init] ;
     
+    [requestT setURL:[NSURL URLWithString:@"http://travelapp.cityu.me/users/userLogOut/"]];
     
-    [prefs2 synchronize];
+    [requestT setHTTPMethod:@"POST"];
+    
+    [requestT setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
+    [requestT setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    [requestT setHTTPBody:postData];
+    
+    [self.view endEditing:YES];
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:requestT delegate:self];
+    
+    if(conn) {
+        NSLog(@"Connection Successful");
+        
+    } else {
+        NSLog(@"Connection could not be made");
+        
+        
+    }
+
 }
 
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    
+    responseData = [[NSMutableData alloc] init];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    
+    [responseData appendData:data];
+}
+
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection
+                  willCacheResponse:(NSCachedURLResponse*)cachedResponse {
+    
+    return nil;
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    
+    NSError *e;
+    
+    
+    
+    
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseData options:nil error:&e];
+    
+    
+    NSDictionary* meta=[dict objectForKey:@"meta"];
+    
+    NSString* code=(NSString*)[[meta objectForKey:@"status"]stringValue];
+    
+    
+    
+    if ([code isEqualToString: @"100"]) {
+        
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle:@"Validation Error"
+                                      message:@""
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        
+        
+        UIAlertAction* noButton = [UIAlertAction
+                                   actionWithTitle:@"Close"
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action)
+                                   {
+                                       [alert dismissViewControllerAnimated:YES completion:nil];
+                                       
+                                   }];
+        
+        
+        [alert addAction:noButton];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        
+    }
+    
+    
+    if([code isEqualToString: @"200"]){
+        
+        
+        NSUserDefaults *prefs2 = [NSUserDefaults standardUserDefaults];
+        
+        [prefs2 setObject:@"" forKey:@"username"];
+        
+        [prefs2 setObject:@"" forKey:@"session_id"];
+        
+        [prefs2 setObject:@"" forKey:@"pass"];
+        
+        [prefs2 setObject:@"" forKey:@"email"];
+        
+        
+        [prefs2 synchronize];
+        
+        
+        ab=YES;
+        [self performSegueWithIdentifier:@"logout" sender:self];
+
+        
+        NSLog(@"success");
+    }
+}
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    
+    if (ab==NO) {
+        return NO;
+    }
+    else return YES;
+    
+}
 @end

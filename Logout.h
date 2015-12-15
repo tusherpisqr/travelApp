@@ -10,6 +10,7 @@
 
 @interface Logout : UIViewController{
     BOOL ab;
+    NSMutableData* responseData;
 }
 @property (strong, nonatomic) IBOutlet UILabel *lblUserName;
 @property (strong, nonatomic) IBOutlet UILabel *lblEmail;

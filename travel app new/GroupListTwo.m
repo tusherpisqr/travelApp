@@ -25,6 +25,7 @@
 }
 
 
+
 -(void)viewDidLoad{
    [self.navigationController setNavigationBarHidden:NO animated:YES];
     
@@ -162,8 +163,7 @@
     
     if ([[segue identifier] isEqualToString:@"showDetails"])
     {
-       // GroupDetailsTwo *vc = [segue destinationViewController];
-        //[vc setIsHidden:@"No"];
+       
         
     }
 }
