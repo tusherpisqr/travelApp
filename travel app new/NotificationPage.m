@@ -23,6 +23,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     notificationCounts=[[NSMutableArray alloc]init];
+    
     groupCounts=[[NSMutableArray alloc]init];
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -232,6 +233,10 @@
     {
         
         second=0;
+        notificationCounts=nil;
+        [tableViewNotifications reloadData];
+        groupCounts=nil;
+        [tableViewGroups reloadData];
     }
 }
 

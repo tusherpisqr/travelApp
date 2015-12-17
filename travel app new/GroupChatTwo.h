@@ -14,9 +14,11 @@
     NSMutableArray* responses;
     NSMutableData* responseData;
     int count;
+    int state;
 }
 @property (strong, nonatomic) IBOutlet UITextField *txtMessage;
 @property (strong, nonatomic) IBOutlet UIButton *btnSend;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic) CGFloat lastContentOffset;
 
 @end

@@ -22,6 +22,7 @@
     NSString* sessionId;
     messages=[[NSMutableArray alloc]init];
     count=0;
+    state=1;
     
    NSNumber* groupId = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedGroupID"];
     
@@ -153,10 +154,14 @@
     
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView.contentOffset.y == 0){
+-(void)scrollViewWillEndDragging:(UIScrollView *)scrollView
+                    withVelocity:(CGPoint)velocity
+             targetContentOffset:(inout CGPoint *)targetContentOffset{
+    
+    if (velocity.y < 0){
+       // NSLog(@"new");
         NSString* sessionId;
-        
+        count=1;
         NSNumber* groupId = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedGroupID"];
         
         NSString* groupIDstring=[NSString stringWithFormat:@"%lld",[groupId longLongValue]];
@@ -197,38 +202,118 @@
         }
 
     }
-    
+    if (velocity.y > 0){
+        //old
+        NSString* sessionId;
+        count=0;
+        NSNumber* groupId = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedGroupID"];
+        
+        NSString* groupIDstring=[NSString stringWithFormat:@"%lld",[groupId longLongValue]];
+        
+        sessionId = [[NSUserDefaults standardUserDefaults] objectForKey:@"session_id"];
+        
+        NSString* lastMessageId;
+        lastMessageId=[[messages lastObject]valueForKey:@"msgId"];
+        
+        NSString *post = [NSString stringWithFormat:@"session_id=%@&group_id=%@&last_message_id=%@",sessionId,groupIDstring,lastMessageId];
+        
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        
+        NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+        
+        NSMutableURLRequest *requestT = [[NSMutableURLRequest alloc] init] ;
+        
+        [requestT setURL:[NSURL URLWithString:@"http://travelapp.cityu.me/message/getNewAvailableMessageFromGroup/"]];
+        
+        [requestT setHTTPMethod:@"POST"];
+        
+        [requestT setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        
+        [requestT setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        [requestT setHTTPBody:postData];
+        
+        [self.view endEditing:YES];
+        NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:requestT delegate:self];
+        
+        if(conn) {
+            NSLog(@"Connection Successful");
+            
+        } else {
+            NSLog(@"Connection could not be made");
+            
+            
+        }
+
+    }
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *simpleTableIdentifier = @"cellDetail";
-    
-    cellDetail *cell = (cellDetail *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    if (cell == nil)
-    {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"cellDetail" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
-        
-    }
     NSDictionary* ab=[messages objectAtIndex:indexPath.row];
     NSString* avatar=[ab valueForKey:@"avatar"];
     NSString* msg=[ab valueForKey:@"msg"];
-    
+    NSString* userId=[ab valueForKey:@"user_id"];
     
     NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:avatar]];
     
-    if ([avatar isEqualToString:@""]) {
-        cell.imgView.image=[UIImage imageNamed:@"logo-tours.png"];
+    NSString* userID;
+    
+    userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"];
+    
+       
+    if ([userID  isEqual:userId]) {
+        static NSString *simpleTableIdentifier = @"cellDetailTwo";
+        
+        cellDetailTwo *cell = (cellDetailTwo *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        if (cell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"cellDetailTwo" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+            
+        }
+        
+        if ([avatar isEqualToString:@""]) {
+            cell.imgView.image=[UIImage imageNamed:@"logo-tours.png"];
+        }
+        else{
+            cell.imgView.image=[UIImage imageWithData:imageData];
+        }
+        
+        cell.title.text=msg;
+        cell.titleDetail.text=@"";
+        return cell;
+        
+
     }
     else{
-        cell.imgView.image=[UIImage imageWithData:imageData];
+        static NSString *simpleTableIdentifier = @"cellDetail";
+        
+        cellDetail *cell = (cellDetail *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        if (cell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"cellDetail" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+            
+        }
+        
+        if ([avatar isEqualToString:@""]) {
+            cell.imgView.image=[UIImage imageNamed:@"logo-tours.png"];
+        }
+        else{
+            cell.imgView.image=[UIImage imageWithData:imageData];
+        }
+        
+        cell.title.text=msg;
+        cell.titleDetail.text=@"";
+        return cell;
+        
+
     }
     
-    cell.title.text=msg;
-    cell.titleDetail.text=@"";
-     return cell;
+    return nil;
 }
 
 
@@ -238,9 +323,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
-    
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -252,6 +334,7 @@
     
     [responseData appendData:data];
 }
+
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection
                   willCacheResponse:(NSCachedURLResponse*)cachedResponse {
@@ -265,7 +348,7 @@
     
     
     
-    count++;
+   
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseData options:nil error:&e];
     
     
@@ -304,7 +387,7 @@
         
         if ([[dict objectForKey:@"response"] isKindOfClass:[NSString class]]) {
             NSString* sessionId;
-            
+            count=0;
             NSNumber* groupId = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedGroupID"];
             
             NSString* groupIDstring=[NSString stringWithFormat:@"%lld",[groupId longLongValue]];
@@ -356,13 +439,19 @@
                     }
                 }
                 if (yes==0) {
-                    [messages addObject:ab];
+                    if (count==0) {
+                        [messages addObject:ab];
+                    }
+                    if (count==1) {
+                        [messages insertObject:ab atIndex:0];
+                    }
+                    
                 }
             }
             
            
       
-        
+           
         [self.tableView reloadData];
         }
         

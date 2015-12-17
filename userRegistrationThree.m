@@ -188,6 +188,8 @@
     if([code isEqualToString: @"200"]){
         NSDictionary *dict2=(NSDictionary*)[dict objectForKey:@"response"];
         
+         NSString* userid=(NSString*)[dict2 objectForKey:@"user_id"];
+        
         NSString* username=(NSString*)[dict2 objectForKey:@"username"];
         
          NSString* sessionId=(NSString*)[dict2 objectForKey:@"session_id"];
@@ -199,6 +201,8 @@
         NSString* device_token=(NSString*)[dict2 objectForKey:@"device_token"];
         
         NSUserDefaults *prefs2 = [NSUserDefaults standardUserDefaults];
+        
+        [prefs2 setObject:userid forKey:@"userid"];
         
         [prefs2 setObject:username forKey:@"username"];
         
