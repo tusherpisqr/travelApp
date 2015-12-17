@@ -830,6 +830,13 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PXQ-Pw-X45">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="313"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <label key="tableFooterView" hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Notifications Available" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="83H-2e-EXv">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <sections/>
                                 <connections>
                                     <outlet property="dataSource" destination="M6p-xa-AUr" id="3GZ-Il-PNg"/>
@@ -877,6 +884,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="lblNoNotification" destination="83H-2e-EXv" id="eKQ-6I-LLy"/>
                         <outlet property="tableViewGroups" destination="8bz-Oa-uh4" id="uHO-aV-Id4"/>
                         <outlet property="tableViewNotifications" destination="PXQ-Pw-X45" id="tMQ-h4-cZz"/>
                         <segue destination="qEp-Bh-5nP" kind="show" identifier="chatGroups" id="0Ac-bc-AwW"/>

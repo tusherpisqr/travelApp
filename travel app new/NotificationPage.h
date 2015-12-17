@@ -22,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableViewNotifications;
 @property (strong, nonatomic) IBOutlet UITableView *tableViewGroups;
 
+@property (strong, nonatomic) IBOutlet UILabel *lblNoNotification;
 
 
 @end

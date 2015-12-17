@@ -453,9 +453,17 @@
        notificationCounts=[[NSMutableArray alloc ]initWithArray:[output valueForKey:@"notification"]];
         groupCounts=[[NSMutableArray alloc ]initWithArray:[output valueForKey:@"groups"]];
         
-        [tableViewGroups reloadData];
+        if (notificationCounts.count ==0) {
+            [tableViewNotifications reloadData];
+            [_lblNoNotification setHidden:NO];
+        }
+        else{
         [tableViewNotifications reloadData];
+            [_lblNoNotification setHidden:YES];
 
+        }
+        
+        [tableViewGroups reloadData];
         
         NSLog(@"success");
     }
@@ -463,6 +471,15 @@
         
         [notificationCounts removeObjectAtIndex:selectedID];
         [tableViewNotifications reloadData];
+        if (notificationCounts.count ==0) {
+            [_lblNoNotification setHidden:NO];
+        }
+        else{
+            [tableViewNotifications reloadData];
+            [_lblNoNotification setHidden:YES];
+
+        }
+
 
     }
 }

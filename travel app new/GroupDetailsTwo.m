@@ -22,7 +22,7 @@
 
 - (IBAction)Back
 {
-    [self dismissViewControllerAnimated:YES completion:nil]; // ios 6
+   [self.navigationController popViewControllerAnimated:YES]; // // ios 6
 }
 -(void)viewDidLoad{
     self.navigationItem.hidesBackButton=NO;

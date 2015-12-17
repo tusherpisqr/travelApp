@@ -255,8 +255,16 @@
     NSDictionary* ab=[messages objectAtIndex:indexPath.row];
     NSString* avatar=[ab valueForKey:@"avatar"];
     NSString* msg=[ab valueForKey:@"msg"];
-    NSString* userId=[ab valueForKey:@"user_id"];
+    NSString* userId=[ab valueForKey:@"send_by"];
+    long dateTime=[[ab valueForKey:@"date"] longLongValue];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:dateTime];
     
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+   
+    [dateFormatter setDateFormat:@"MMM dd, yyyy HH:mm"];
+    NSString *dateString = [dateFormatter stringFromDate:date];
+    
+    NSLog(@"%@",dateString);
     NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:avatar]];
     
     NSString* userID;
@@ -283,7 +291,7 @@
         }
         
         cell.title.text=msg;
-        cell.titleDetail.text=@"";
+        cell.titleDetail.text=dateString;
         return cell;
         
 
@@ -307,7 +315,7 @@
         }
         
         cell.title.text=msg;
-        cell.titleDetail.text=@"";
+        cell.titleDetail.text=dateString;
         return cell;
         
 
